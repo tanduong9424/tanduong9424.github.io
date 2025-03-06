@@ -1,1 +1,202 @@
-abc xyz
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manchester City</title>
+  <style>
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 150%;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('/bgmc.webp');
+      background-size: cover;
+      background-position: center;
+    }
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover; /* Đảm bảo hình ảnh luôn vừa với khung */
+      border-radius: 50%; /* Làm ảnh tròn, nếu cần */
+    }
+	
+    
+    /* Container with grid layout for player positions */
+    .formation {
+      display: grid;
+      grid-template-areas:
+        "player2 . . player1 . . player5 "
+	".  . player3 . player4 . ."
+	". player6 . player9 . player7 ."
+	". . player8 player11 player10 . .";
+
+      gap: 40px;
+      width: 80vw;
+      height: 80vh;
+      transform: translateY(-40%);
+    }
+    
+    /* General styling for player cards */
+    .player-card {
+    background: rgba(8, 8, 8, 0.596); /* White with 60% transparency */
+    width: 150px;
+    padding: 0px;
+    box-shadow: 0 4px 8px rgba(124, 197, 249, 0.2);
+    border-radius: 5px;
+    text-align: center;
+  }
+    
+    .player-card img {
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+      margin-bottom: 10px;
+    }
+    
+    .player-card h3, .player-card p {
+      margin: 5px 0;
+      color:rgb(255, 255, 255);
+    }
+    
+    .player-card .player-number {
+      font-size: 20px;
+      font-weight: bold;
+      color:rgb(255, 255, 255);
+    }
+
+    /* Position each player in the grid */
+    .player1 { 
+      grid-area: player1; }
+    .player2 {
+       grid-area: player2;
+       transform: translateY( 30%); }
+    .player3 { 
+      grid-area: player3;
+      transform: translateY(-50%); }
+    .player4 { 
+      grid-area: player4;
+      transform: translateY(-50%); }
+    .player5 {
+       grid-area: player5; 
+       transform: translateY(30%);}
+    .player6 { 
+      grid-area: player6;
+      transform: translateY(-100%); }
+    .player7 { 
+      grid-area: player7;
+      transform: translateY(-100%); }
+    .player8 { 
+      grid-area: player8;
+      transform: translateY(-150%); }
+    .player9 { 
+      grid-area: player9;
+      transform: translateY(-70%); }
+    .player10 { 
+      grid-area: player10;
+      transform: translateY(-150%); }
+    .player11 { 
+      grid-area: player11; 
+      transform: translateY(-90%);}
+
+  </style>
+</head>
+<body>
+
+<div class="formation">
+  <div class="player-card player1">
+    <img src="/haaland.webp" alt="Player 1">
+    <div class="player-number">9</div>
+    <h3>Erling Haaland</h3>
+    <p>Vị trí: Tiền Đạo</p>
+    <p>Ngày sinh: 21/07/2000</p>
+    <p>Quốc tịch: Na Uy</p>
+  </div>
+  <div class="player-card player2">
+    <img src="/jack.webp" alt="Player 2">
+    <div class="player-number">10</div>
+    <h3>Jack Grealish</h3>
+    <p>Vị trí: Tiền đạo cánh trái</p>
+    <p>Ngày sinh: 10/09/1995</p>
+    <p>Quốc tịch: Anh</p>
+  </div>
+  <div class="player-card player3">
+    <img src="/kevin.webp" alt="Player 1">
+    <div class="player-number">17</div>
+    <h3>Kevin De Bruyne</h3>
+    <p>Vị trí: Tiền vệ trung tâm</p>
+    <p>Ngày sinh: 28/06/1991</p>
+    <p>Quốc tịch: Bỉ</p>
+  </div>
+  <div class="player-card player4">
+    <img src="/ikay.webp" alt="Player 2">
+    <div class="player-number">8</div>
+    <h3>İlkay Gündoğan</h3>
+    <p>Vị trí: Tiền vệ trung tâm</p>
+    <p>Ngày sinh: 24/10/1990</p>
+    <p>Quốc tịch: Đức</p>
+  </div>
+  <div class="player-card player5">
+    <img src="/silva.webp" alt="Player 1">
+    <div class="player-number">20</div>
+    <h3>Bernardo Silva</h3>
+    <p>Vị trí: Tiền vệ trung tâm</p>
+    <p>Ngày sinh: 22/09/1984</p>
+    <p>Quốc tịch: Bồ Đào Nha</p>
+  </div>
+  <div class="player-card player6">
+    <img src="/rodri.webp" alt="Player 2">
+    <div class="player-number">16</div>
+    <h3>Rodri</h3>
+    <p>Vị trí: Tiền vệ phòng ngự</p>
+    <p>Ngày sinh: 22/06/1996</p>
+    <p>Quốc tịch: Tây Ban Nha</p>
+  </div>
+  <div class="player-card player7">
+    <img src="/stone.webp" alt="Player 1">
+    <div class="player-number">5</div>
+    <h3>John Stones</h3>
+    <p>Vị trí: Tiền vệ phòng ngự</p>
+    <p>Ngày sinh: 28/05/1994</p>
+    <p>Quốc tịch: Anh</p>
+  </div>
+  <div class="player-card player8">
+    <img src="/ake.webp" alt="Player 2">
+    <div class="player-number">4</div>
+    <h3>Nathan Aké</h3>
+    <p>Vị trí: Trung vệ</p>
+    <p>Ngày sinh: 18/02/1995</p>
+    <p>Quốc tịch: Hà Lan</p>
+  </div>
+  <div class="player-card player9">
+    <img src="/ruben.webp" alt="Player 1">
+    <div class="player-number">3</div>
+    <h3>Rúben Dias</h3>
+    <p>Vị trí: Trung vệ</p>
+    <p>Ngày sinh: 14/05/1997</p>
+    <p>Quốc tịch: Bồ Đào Nha</p>
+  </div>
+  <div class="player-card player10">
+    <img src="/akanji.webp" alt="Player 2">
+    <div class="player-number">25</div>
+    <h3>Manuel Akanji</h3>
+    <p>Vị trí: Trung vệ</p>
+    <p>Ngày sinh: 19/07/1995</p>
+    <p>Quốc tịch: Thụy Sĩ</p>
+  </div><div class="player-card player11">
+    <img src="/ederson.webp" alt="Player 2">
+    <div class="player-number">31</div>
+    <h3>Ederson</h3>
+    <p>Vị trí: Thủ môn</p>
+    <p>Ngày sinh: 08/09/1993</p>
+    <p>Quốc tịch: Brazil</p>
+  </div>
+  <!-- Add other players similarly with correct classes from player3 to player11 -->
+</div>
+
+</body>
+</html>
