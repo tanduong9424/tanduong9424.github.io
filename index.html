@@ -3,150 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huỳnh Tấn Dương - Portfolio CV</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Huỳnh Tấn Dương - Intern SOC CV</title>
+    <!-- Thêm font chữ Inter hiện đại -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --text-color: #333;
-            --bg-color: #f4f7f6;
+            --primary-dark: #0f172a; 
+            --accent-blue: #0284c7;
+            --text-main: #334155; 
+            --text-light: #64748b; 
+            --bg-body: #f1f5f9; 
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
+            color: var(--text-main);
+            background-color: var(--bg-body);
             margin: 0;
-            padding: 0;
+            padding: 20px 0;
         }
 
         .container {
             max-width: 900px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 40px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            overflow: hidden;
         }
 
         header {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 40px;
             text-align: center;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
         }
 
         h1 {
             margin: 0;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 2.2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .role-title {
+            color: #38bdf8; 
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-top: 5px;
+            margin-bottom: 20px;
         }
 
         .contact-info {
-            margin-top: 10px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
+            font-size: 0.9em;
+            color: #cbd5e1;
         }
 
-        .contact-info span {
-            font-size: 0.9em;
+        .contact-info a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-info a:hover {
+            color: white;
         }
 
         .contact-info i {
-            color: var(--accent-color);
-            margin-right: 5px;
+            color: #38bdf8;
+            margin-right: 6px;
+        }
+
+        /* NỘI DUNG CHÍNH */
+        .main-content {
+            padding: 40px;
         }
 
         section {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         h2 {
-            color: var(--primary-color);
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
+            color: var(--primary-dark);
+            font-size: 1.25em;
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 1.2em;
-            margin-bottom: 15px;
-        }
-
-        .education-item, .project-item {
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
         }
 
-        .item-header {
+        h2 i {
+            color: var(--accent-blue);
+            margin-right: 10px;
+            font-size: 1.1em;
+        }
+
+        .objective-text {
+            text-align: justify;
+        }
+
+        .education-item {
             display: flex;
             justify-content: space-between;
-            font-weight: bold;
-            color: #444;
+            align-items: flex-start;
+        }
+
+        .edu-details h3 {
+            margin: 0 0 5px 0;
+            color: var(--primary-dark);
+            font-size: 1.1em;
+        }
+
+        .edu-details p {
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        .edu-date {
+            font-weight: 500;
+            color: var(--accent-blue);
+            background: #e0f2fe;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+
+        .gpa-box {
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.9em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .skill-group h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary-dark);
+            font-size: 0.95em;
         }
 
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 8px;
         }
 
         .tag {
-            background: #ebf5fb;
-            color: #2980b9;
-            padding: 5px 12px;
-            border-radius: 15px;
+            background: white;
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 6px;
             font-size: 0.85em;
             font-weight: 500;
-            border: 1px solid #d4e6f1;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .project-grid {
+            display: grid;
+            gap: 20px;
         }
 
         .project-item {
-            padding: 15px;
-            border: 1px solid #eee;
-            border-radius: 6px;
-            transition: 0.3s;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--border-color);
+            transition: all 0.3s;
         }
 
         .project-item:hover {
-            border-color: var(--accent-color);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left-color: var(--accent-blue);
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
         .project-title {
-            font-weight: bold;
-            color: var(--accent-color);
-            display: block;
-            margin-bottom: 5px;
-            text-decoration: none;
+            font-size: 1.05em;
+            font-weight: 600;
+            color: var(--primary-dark);
         }
 
         .project-link {
-            display: inline-block;
-            margin-top: 8px;
-            color: #e67e22;
+            color: var(--accent-blue);
             text-decoration: none;
             font-size: 0.9em;
-            font-weight: bold;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .project-link:hover {
             text-decoration: underline;
         }
 
-        .gpa-box {
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 5px;
+        .project-desc {
+            margin: 0 0 10px 0;
+            font-size: 0.95em;
         }
 
-        @media (max-width: 600px) {
-            .container { padding: 20px; margin: 10px; }
-            .item-header { flex-direction: column; }
+        .project-tech {
+            font-size: 0.8em;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .skills-grid { grid-template-columns: 1fr; }
+            .education-item { flex-direction: column; gap: 10px; }
+            .main-content { padding: 20px; }
+            header { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -155,85 +257,104 @@
 <div class="container">
     <header>
         <h1>Huỳnh Tấn Dương</h1>
-        <p>Sinh viên năm 4 - Chuyên ngành Kỹ thuật Máy tính</p>
+        <div class="role-title">Thực tập sinh SOC </div>
         <div class="contact-info">
             <span><i class="fas fa-map-marker-alt"></i> TP. Hồ Chí Minh</span>
-            <span><i class="fas fa-envelope"></i> huynhtanduongit@gmail.com</span>
-            <span><i class="fas fa-phone"></i> 0373148245</span>
-            <span><i class="fab fa-github"></i> <a href="https://github.com/tanduong9424" target="_blank" style="text-decoration:none; color:inherit;">tanduong9424</a></span>
+            <a href="mailto:huynhtanduongit@gmail.com"><i class="fas fa-envelope"></i> huynhtanduongit@gmail.com</a>
+            <span><i class="fas fa-phone"></i> 0373.148.245</span>
+            <a href="https://github.com/tanduong9424" target="_blank"><i class="fab fa-github"></i> github.com/tanduong9424</a>
+            <a href="https://www.linkedin.com/in/huỳnh-tấn-dương-b003352ab" target="_blank"><i class="fab fa-linkedin"></i>Huỳnh Tấn Dương </a> 
         </div>
     </header>
 
-    <section id="objective">
-        <h2>Mục tiêu nghề nghiệp</h2>
-        <p>Sinh viên năm cuối nhiệt huyết, có nền tảng vững chắc về quản trị mạng và bảo mật hệ thống. Thành thạo cấu hình thiết bị Cisco, triển khai Firewall và giám sát hạ tầng. Mong muốn thực tập tại vị trí <strong>Network Engineer</strong> hoặc <strong>System Admin</strong> để ứng dụng kiến thức vào thực tế và phát triển lộ trình chuyên nghiệp.</p>
-    </section>
+    <div class="main-content">
+        <section id="objective">
+            <h2><i class="fas fa-bullseye"></i> Mục tiêu nghề nghiệp</h2>
+            <p class="objective-text">
+                Sinh viên năm cuối chuyên ngành Kỹ thuật Máy tính với nền tảng kiến thức về Mạng và Hệ thống máy tính. Định hướng phát triển sự nghiệp trong lĩnh vực <strong>An toàn thông tin (Cyber Security)</strong>. Tôi mong muốn ứng tuyển vị trí <strong>Thực tập sinh SOC (SOC Intern)</strong> để áp dụng kiến thức về giám sát hệ thống, phân tích log, vận hành IDS/IPS (Suricata, pfSense) và trau dồi quy trình kiến thức về phản ứng sự cố trong môi trường doanh nghiệp thực tế.
+            </p>
+        </section>
 
-    <section id="education">
-        <h2>Học vấn</h2>
-        <div class="education-item">
-            <div class="item-header">
-                <span>Trường Đại học Sài Gòn</span>
-                <span>09/2022 - Hiện tại</span>
+        <section id="education">
+            <h2><i class="fas fa-graduation-cap"></i> Học vấn</h2>
+            <div class="education-item">
+                <div class="edu-details">
+                    <h3>Đại học Sài Gòn</h3>
+                    <p>Kỹ sư Công nghệ Thông tin - Chuyên ngành: Kỹ thuật Máy tính</p>
+                    <div class="gpa-box">GPA: 3.39/4.0 | 8.39/10</div>
+                </div>
+                <div class="edu-date">09/2022 - Hiện tại</div>
             </div>
-            <div>Ngành: Công nghệ Thông tin - Chuyên ngành: Kỹ thuật Máy tính</div>
-            <div class="gpa-box">
-                <strong>GPA: 3.39/4.0 | 8.39/10</strong>
+        </section>
+
+        <section id="skills">
+            <h2><i class="fas fa-laptop-code"></i> Kỹ năng chuyên môn</h2>
+            <div class="skills-grid">
+                <div class="skill-group">
+                    <h4>Security & Monitoring (SOC Skills)</h4>
+                    <div class="skill-tags">
+                        <span class="tag">Phân tích Log/Traffic (Wireshark)</span>
+                        <span class="tag">IDS/IPS (Suricata)</span>
+                        <span class="tag">Firewall (pfSense)</span>
+                        <span class="tag">Zabbix Monitoring</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4>System & Network Infrastructure</h4>
+                    <div class="skill-tags">
+                        <span class="tag">Linux (Ubuntu/CentOS)</span>
+                        <span class="tag">VLAN / Routing / Switching</span>
+                        <span class="tag">VPN (IPsec/GRE)</span>
+                        <span class="tag">Virtualization (VMware/GNS3)</span>
+                        <span class="tag">Load Balancing (NGINX/HAProxy)</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="skills">
-        <h2>Kỹ năng chuyên môn</h2>
-        <div class="skill-category">
-            <strong>Hạ tầng & Mạng:</strong>
-            <div class="skill-tags">
-                <span class="tag">Cisco Packet Tracer</span>
-                <span class="tag">GNS3</span>
-                <span class="tag">VLAN/Routing/Switching</span>
-                <span class="tag">VPN (IPsec/GRE)</span>
+        <section id="projects">
+            <h2><i class="fas fa-project-diagram"></i> Dự án tiêu biểu</h2>
+            <div class="project-grid">
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span class="project-title">Triển khai Firewall pfSense & IDS/IPS Suricata</span>
+                        <a href="https://github.com/tanduong9424/Firewall" class="project-link" target="_blank"><i class="fab fa-github"></i> Source</a>
+                    </div>
+                    <p class="project-desc">Xây dựng hạ tầng bảo mật trên môi trường ảo hóa. <strong>Trọng tâm:</strong> Cấu hình Suricata (IDS/IPS) để giám sát lưu lượng mạng, phân tích các cảnh báo xâm nhập, thiết lập rules phòng thủ và cấu hình phân vùng DMZ bảo vệ máy chủ.</p>
+                    <div class="project-tech">Công nghệ: pfSense, Suricata, HAProxy, Linux.</div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span class="project-title">Mô phỏng tấn công & Phòng chống ARP Spoofing</span>
+                        <a href="https://github.com/tanduong9424/Timhieu_ARP_Spoofing" class="project-link" target="_blank"><i class="fab fa-github"></i> Source</a>
+                    </div>
+                    <p class="project-desc">Thực hiện mô phỏng kịch bản tấn công MITM (ARP Spoofing) trong Lab. <strong>Trọng tâm:</strong> Sử dụng Wireshark để bắt và phân tích gói tin mạng bất thường, từ đó triển khai giải pháp phòng chống bằng Switch Layer 2 (DAI, DHCP Snooping).</p>
+                    <div class="project-tech">Công nghệ: GNS3, Wireshark, Kali Linux, Cisco Switch.</div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span class="project-title">Giám sát hiệu suất hạ tầng tập trung (Zabbix)</span>
+                        <a href="https://github.com/tanduong9424/ZABBIX-Performance-monitoring" class="project-link" target="_blank"><i class="fab fa-github"></i> Source</a>
+                    </div>
+                    <p class="project-desc">Xây dựng hệ thống giám sát tính sẵn sàng (Availability) cho hệ thống. Thiết lập các Triggers và cấu hình cảnh báo tự động qua Email khi phát hiện dấu hiệu quá tải CPU/RAM hoặc đầy ổ cứng (giả lập trường hợp bị DDoS hoặc gặp sự cố).</p>
+                    <div class="project-tech">Công nghệ: Zabbix Server/Agent, Linux, Windows Server.</div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span class="project-title">Thiết lập kết nối an toàn VPN GRE Tunnel & IPsec</span>
+                        <a href="https://github.com/tanduong9424/VPN_GRE_TUNNEL_IPSEC" class="project-link" target="_blank"><i class="fab fa-github"></i> Source</a>
+                    </div>
+                    <p class="project-desc">Triển khai đường truyền mã hóa giữa các Site để bảo vệ tính bảo mật và toàn vẹn của dữ liệu trên môi trường Internet công cộng, ứng dụng các thuật toán mã hóa của IPsec.</p>
+                    <div class="project-tech">Công nghệ: Cisco Router, IPsec, GRE Tunnel, GNS3.</div>
+                </div>
+
             </div>
-        </div>
-        <div class="skill-category" style="margin-top:15px;">
-            <strong>Hệ thống & Bảo mật:</strong>
-            <div class="skill-tags">
-                <span class="tag">Linux (Ubuntu/CentOS)</span>
-                <span class="tag">VMWare</span>
-                <span class="tag">pfSense Firewall</span>
-                <span class="tag">IDS/IPS Suricata</span>
-                <span class="tag">Zabbix Monitoring</span>
-                <span class="tag">NGINX Load Balancing</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <h2>Dự án kỹ thuật tiêu biểu</h2>
-
-        <div class="project-item">
-            <span class="project-title">Cấu hình VPN GRE Tunnel kết hợp IPsec</span>
-            <p>Thiết kế và triển khai đường truyền bảo mật VPN GRE Tunnel kết hợp mã hóa IPsec trên môi trường giả lập GNS3, đảm bảo an toàn dữ liệu trên kênh truyền công cộng.</p>
-            <a href="https://github.com/tanduong9424/VPN_GRE_TUNNEL_IPSEC" class="project-link" target="_blank"><i class="fab fa-github"></i> Xem mã nguồn dự án</a>
-        </div>
-
-        <div class="project-item">
-            <span class="project-title">Mô phỏng tấn công & Phòng chống ARP Spoofing</span>
-            <p>Xây dựng kịch bản tấn công ARP Spoofing trên VMWare/GNS3. Triển khai các giải pháp bảo mật Layer 2 bao gồm <strong>Dynamic ARP Inspection (DAI)</strong> và <strong>DHCP Snooping</strong>.</p>
-            <a href="https://github.com/tanduong9424/Timhieu_ARP_Spoofing" class="project-link" target="_blank"><i class="fab fa-github"></i> Xem mã nguồn dự án</a>
-        </div>
-
-        <div class="project-item">
-            <span class="project-title">Hệ thống Firewall pfSense & IDS/IPS Suricata</span>
-            <p>Triển khai Firewall pfSense, cấu hình vùng DMZ, thiết lập Load Balancing HAProxy và tích hợp hệ thống phát hiện/ngăn ngừa xâm nhập IDS/IPS Suricata trên nền tảng ảo hóa.</p>
-            <a href="https://github.com/tanduong9424/Firewall" class="project-link" target="_blank"><i class="fab fa-github"></i> Xem mã nguồn dự án</a>
-        </div>
-
-        <div class="project-item">
-            <span class="project-title">Giám sát hạ tầng tập trung với Zabbix</span>
-            <p>Thiết lập hệ thống Zabbix để giám sát hiệu suất (CPU, RAM, Disk, Network) cho các Server Linux và Windows, cấu hình cảnh báo tự động khi có sự cố.</p>
-            <a href="https://github.com/tanduong9424/ZABBIX-Performance-monitoring" class="project-link" target="_blank"><i class="fab fa-github"></i> Xem mã nguồn dự án</a>
-        </div>
-    </section>
+        </section>
+    </div>
 </div>
 
 </body>
