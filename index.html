@@ -250,6 +250,77 @@
             .main-content { padding: 20px; }
             header { padding: 30px 20px; }
         }
+        .btn-video {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ef4444; /* Màu đỏ YouTube */
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-video:hover {
+            background: #dc2626;
+        }
+
+        /* Khung Pop-up đen */
+        .modal-overlay {
+            display: none; /* Ẩn mặc định */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background: #000;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        /* Nút tắt X */
+        .close-btn {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .video-responsive {
+            position: relative;
+            width: 100%;       /* Chiếm trọn chiều rộng thẻ cha */
+            max-width: 800px;  /* Bạn có thể tăng số này lên nếu muốn rộng hơn nữa */
+            margin: 20px auto; /* Căn giữa */
+            padding-bottom: 56.25%; /* Giữ tỷ lệ 16:9 để không bị méo hình */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -319,7 +390,7 @@
                 <div class="project-item">
                     <div class="project-header">
                         <span class="project-title">Triển khai Firewall pfSense & IDS/IPS Suricata</span>
-                        <a href="https://github.com/tanduong9424/Firewall" class="project-link" target="_blank"><i class="fab fa-github"></i> Source</a>
+                        <a href="https://github.com/tanduong9424/Firewall" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
                     </div>
                     <p class="project-desc">Xây dựng hạ tầng bảo mật trên môi trường ảo hóa. <strong>Trọng tâm:</strong> Cấu hình Suricata (IDS/IPS) để giám sát lưu lượng mạng, phân tích các cảnh báo xâm nhập, thiết lập rules phòng thủ và cấu hình phân vùng DMZ bảo vệ máy chủ.</p>
                     <div class="project-tech">Công nghệ: pfSense, Suricata, HAProxy, Linux.</div>
@@ -328,16 +399,23 @@
                 <div class="project-item">
                     <div class="project-header">
                         <span class="project-title">Mô phỏng tấn công & Phòng chống ARP Spoofing</span>
-                        <a href="https://github.com/tanduong9424/Timhieu_ARP_Spoofing" class="project-link" target="_blank"><i class="fab fa-github"></i> Source</a>
+                        <a href="https://github.com/tanduong9424/Timhieu_ARP_Spoofing" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
                     </div>
                     <p class="project-desc">Thực hiện mô phỏng kịch bản tấn công MITM (ARP Spoofing) trong Lab. <strong>Trọng tâm:</strong> Sử dụng Wireshark để bắt và phân tích gói tin mạng bất thường, từ đó triển khai giải pháp phòng chống bằng Switch Layer 2 (DAI, DHCP Snooping).</p>
                     <div class="project-tech">Công nghệ: GNS3, Wireshark, Kali Linux, Cisco Switch.</div>
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/1dm-6aczEgE?si=e5ZSivKZl9iJca3I" 
+                                title="Demo ARP Spoofing" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
 
                 <div class="project-item">
                     <div class="project-header">
                         <span class="project-title">Giám sát hiệu suất hạ tầng tập trung (Zabbix)</span>
-                        <a href="https://github.com/tanduong9424/ZABBIX-Performance-monitoring" class="project-link" target="_blank"><i class="fab fa-github"></i> Source</a>
+                        <a href="https://github.com/tanduong9424/ZABBIX-Performance-monitoring" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
                     </div>
                     <p class="project-desc">Xây dựng hệ thống giám sát tính sẵn sàng (Availability) cho hệ thống. Thiết lập các Triggers và cấu hình cảnh báo tự động qua Email khi phát hiện dấu hiệu quá tải CPU/RAM hoặc đầy ổ cứng (giả lập trường hợp bị DDoS hoặc gặp sự cố).</p>
                     <div class="project-tech">Công nghệ: Zabbix Server/Agent, Linux, Windows Server.</div>
@@ -346,10 +424,47 @@
                 <div class="project-item">
                     <div class="project-header">
                         <span class="project-title">Thiết lập kết nối an toàn VPN GRE Tunnel & IPsec</span>
-                        <a href="https://github.com/tanduong9424/VPN_GRE_TUNNEL_IPSEC" class="project-link" target="_blank"><i class="fab fa-github"></i> Source</a>
+                        <a href="https://github.com/tanduong9424/VPN_GRE_TUNNEL_IPSEC" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
                     </div>
                     <p class="project-desc">Triển khai đường truyền mã hóa giữa các Site để bảo vệ tính bảo mật và toàn vẹn của dữ liệu trên môi trường Internet công cộng, ứng dụng các thuật toán mã hóa của IPsec.</p>
                     <div class="project-tech">Công nghệ: Cisco Router, IPsec, GRE Tunnel, GNS3.</div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span class="project-title">Cấu hình Load Balancing bằng Nginx trên CentOS</span>
+                        <a href="https://github.com/tanduong9424/Load-Balancing-NGINX" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
+                    </div>
+                    <p class="project-desc">Xây dựng kiến trúc cân bằng tải nhằm nâng cao hiệu năng và độ ổn định của hệ thống Web Server.. <strong>Trọng tâm:</strong> Sử dụng Wireshark để bắt và phân tích gói tin mạng bất thường, từ đó triển khai giải pháp phòng chống bằng Switch Layer 2 (DAI, DHCP Snooping).</p>
+                    <div class="project-tech">Công nghệ: CentOS, Nginx.</div>
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/fdOh9TxkmKY?si=ZBv3y063pS1880cN" 
+                                title="Demo Load Balancing" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="project-item">
+                    <div class="project-header">
+                        <span class="project-title">Quản trị Hệ thống với Roaming & Mandatory Profiles</span>
+                    </div>
+                    
+                    <p class="project-desc">
+                        Xây dựng môi trường làm việc tập trung trên Windows Server. 
+                        <strong>Trọng tâm:</strong> Cấu hình cơ chế đồng bộ Profile người dùng, quản trị quyền truy cập tài nguyên qua Active Directory và triển khai Mandatory Profile để tiêu chuẩn hóa trải nghiệm người dùng trong môi trường doanh nghiệp.
+                    </p>
+                    
+                    <div class="project-tech">Công nghệ: Windows Server, Active Directory.</div>
+
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/rvCLUyPi-Yo?si=0N_PqBlhHdZuElT9" 
+                                title="Active Directory Profile Management" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
 
             </div>
