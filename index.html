@@ -21,6 +21,12 @@
             --gradient-1: rgba(2, 132, 199, 0.05);
             --gradient-2: rgba(2, 132, 199, 0.02);
             --card-radius: 16px;
+            /* Header màu đảo để tăng tương phản: mặc định (light mode) header tối, chữ sáng */
+            --header-bg: #0b1120;
+            --header-text: #f8fafc;
+            --header-contrast-bg: rgba(255,255,255,0.08);
+            --header-contrast-border: rgba(255,255,255,0.14);
+            --header-contrast-text: var(--header-text);
         }
 
         body.dark-mode {
@@ -35,6 +41,12 @@
             --border-color: #334155;
             --gradient-1: rgba(14, 165, 233, 0.1);
             --gradient-2: rgba(14, 165, 233, 0.05);
+            /* Khi dark mode bật, đổi header sáng để tăng tương phản */
+            --header-bg: #ffffff;
+            --header-text: #0f172a;
+            --header-contrast-bg: rgba(15,23,42,0.06);
+            --header-contrast-border: rgba(15,23,42,0.12);
+            --header-contrast-text: var(--header-text);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,13 +65,23 @@
 
         /* --- THEME TOGGLE VỚI HIỆU ỨNG ẨN/HIỆN --- */
         .theme-toggle {
-            position: fixed; top: 20px; right: 20px; width: 45px; height: 45px;
-            border-radius: 50%; background-color: var(--bg-card); border: 1px solid var(--border-color);
+            position: fixed; top: 20px; right: 7px; width: 45px; height: 45px;
+            border-radius: 50%; background-color: var(--bg-card); 
+            border: 1px solid var(--border-color);
             color: var(--accent-color); cursor: pointer; display: flex; align-items: center;
             justify-content: center; font-size: 1.3rem; z-index: 1000; 
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+
+        .lang-toggle { 
+            position: fixed; top: 80px; right: 3px; width: 56px; height: 36px; 
+            border-radius: 12px; background-color: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            color: var(--accent-color); cursor: pointer; display: flex; align-items: center; 
+            justify-content: center; font-size: 0.9rem; z-index: 1000; padding: 4px 8px; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
 
         /* Class để ẩn nút khi cuộn */
         .theme-toggle.hidden {
@@ -68,7 +90,21 @@
             transform: translateY(-20px);
         }
 
-        .theme-toggle:hover { transform: scale(1.1); border-color: var(--accent-color); }
+        .theme-toggle:hover { 
+            transform: scale(1.1); 
+            border-color: var(--accent-color); 
+        }
+
+        .lang-toggle.hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+        }
+
+        .lang-toggle:hover { 
+            transform: scale(1.1); 
+            border-color: var(--accent-color); 
+        }
 
         /* Logic Icon: Mặc định Light hiện Moon, sang Dark hiện Sun */
         .theme-toggle .fa-moon { display: block; }
@@ -79,12 +115,14 @@
         /* --- LAYOUT CHÍNH --- */
         .container { max-width: 1400px; width: 95%; margin: 0 auto; padding-bottom: 60px; }
 
-        header { padding: 80px 20px 40px; text-align: center; }
-        h1 { font-family: 'Poppins', sans-serif; font-size: 3.5rem; color: var(--text-primary); margin-bottom: 10px; }
-        .role-title { color: var(--accent-color); font-size: 1.5rem; background: rgba(2, 132, 199, 0.1); padding: 8px 24px; border-radius: 50px; display: inline-block; margin-bottom: 25px; }
+        header { padding: 80px 20px 40px; text-align: center; background: var(--header-bg); color: var(--header-text); border: 1px solid var(--border-color); border-radius: var(--card-radius); box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: background-color 0.4s ease, border-color 0.4s ease, color 0.3s ease; margin: 20px 0 30px; }
+        h1 { font-family: 'Poppins', sans-serif; font-size: 3.5rem; color: var(--header-text); margin-bottom: 10px; }
+        .role-title { color: var(--header-text); font-size: 1.5rem; background: var(--header-contrast-bg); padding: 8px 24px; border-radius: 50px; display: inline-block; margin-bottom: 25px; transition: color 0.3s ease, background 0.3s ease; border: 1px solid var(--header-contrast-border); }
 
         .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
         .contact-info > * { background: var(--bg-card); padding: 10px 20px; border-radius: 12px; color: var(--text-primary); text-decoration: none; border: 1px solid var(--border-color); font-size: 0.9rem; transition: all 0.3s; }
+        /* Override màu trong header để tương phản với header background */
+        header .contact-info > * { color: var(--header-contrast-text); background: var(--header-contrast-bg); border-color: var(--header-contrast-border); }
         .contact-info a:hover { border-color: var(--accent-color); transform: translateY(-2px); }
 
         /* BỐ CỤC GRID */
@@ -131,14 +169,16 @@
     <i class="fas fa-sun"></i>
 </button>
 
+<button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">EN</button>
+
 <div class="container">
     <header id="header">
         <h1>Huỳnh Tấn Dương</h1>
-        <div class="role-title">Thực tập sinh System & Security</div>
+        <div class="role-title" data-i18n="roleTitle">Thực tập sinh System & Security</div>
         <div class="contact-info">
-            <span><i class="fas fa-map-marker-alt"></i> TP. Hồ Chí Minh</span>
-            <a href="mailto:huynhtanduongit@gmail.com"><i class="fas fa-envelope"></i> huynhtanduongit@gmail.com</a>
-            <span><i class="fas fa-phone"></i> 0373.148.245</span>
+            <span data-i18n="city"><i class="fas fa-map-marker-alt"></i> TP. Hồ Chí Minh</span>
+            <span><i class="fas fa-envelope"></i> huynhtanduongit@gmail.com</span>
+            <span data-i18n="phone"><i class="fas fa-phone"></i> 0373.148.245</span>
             <a href="https://github.com/tanduong9424" target="_blank"><i class="fab fa-github"></i> github.com/tanduong9424</a>
             <a href="https://www.linkedin.com/in/huỳnh-tấn-dương-b003352ab" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
@@ -146,48 +186,48 @@
 
     <div class="main-grid">
         <section id="objective" class="full-width">
-            <h2><i class="fas fa-bullseye"></i> Mục tiêu nghề nghiệp</h2>
-            <p>Em là sinh viên năm cuối chuyên ngành Kỹ thuật Máy tính với nền tảng kiến thức về Mạng và Hệ thống máy tính. Định hướng phát triển sự nghiệp trong lĩnh vực <strong>An toàn thông tin (Cyber Security)</strong>. Em mong muốn ứng tuyển vị trí <strong>Thực tập sinh SOC (SOC Intern)</strong> hoặc <strong>Thực tập sinh System Administration</strong> để áp dụng kiến thức về giám sát hệ thống, phân tích log, vận hành IDS/IPS (Suricata, pfSense) và trau dồi quy trình kiến thức về phản ứng sự cố trong môi trường doanh nghiệp thực tế.</p>
+            <h2 data-i18n="objectiveHeading"><i class="fas fa-bullseye"></i> Mục tiêu nghề nghiệp</h2>
+            <p data-i18n="objectiveText">Em là sinh viên năm cuối chuyên ngành Kỹ thuật Máy tính với nền tảng kiến thức về Mạng và Hệ thống máy tính. Định hướng phát triển sự nghiệp trong lĩnh vực <strong>An toàn thông tin (Cyber Security)</strong>. Em mong muốn ứng tuyển vị trí <strong>Thực tập sinh SOC (SOC Intern)</strong> hoặc <strong>Thực tập sinh System Administration</strong> để áp dụng kiến thức về giám sát hệ thống, phân tích log, vận hành IDS/IPS (Suricata, pfSense) và trau dồi quy trình kiến thức về phản ứng sự cố trong môi trường doanh nghiệp thực tế.</p>
         </section>
 
         <section id="education">
-            <h2><i class="fas fa-graduation-cap"></i> Học vấn</h2>
+            <h2 data-i18n="educationHeading"><i class="fas fa-graduation-cap"></i> Học vấn</h2>
             <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                <h3 style="color: var(--text-primary);">Đại học Sài Gòn</h3>
-                <span style="font-size: 0.9rem;">09/2022 - Hiện tại</span>
+                <h3 style="color: var(--text-primary);" data-i18n="university">Đại học Sài Gòn</h3>
+                <span style="font-size: 0.9rem;" data-i18n="educationDate">09/2022 - Hiện tại</span>
             </div>
-            <p style="margin: 10px 0;">Kỹ sư Công nghệ Thông tin - Chuyên ngành: Kỹ thuật Máy tính</p>
+            <p style="margin: 10px 0;" data-i18n="degree">Kỹ sư Công nghệ Thông tin - Chuyên ngành: Kỹ thuật Máy tính</p>
             <div style="background: var(--bg-hover); padding: 8px 15px; border-radius: 8px; display: inline-block; color: var(--text-primary); font-weight: 600; border: 1px solid var(--border-color);">
                 <i class="fas fa-award"></i> GPA: 3.39/4.0 | 8.39/10
             </div>
         </section>
 
         <section id="skills">
-            <h2><i class="fas fa-laptop-code"></i> Kỹ năng chuyên môn</h2>
+            <h2 data-i18n="skillsHeading"><i class="fas fa-laptop-code"></i> Kỹ năng chuyên môn</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 10px;">Security & Monitoring</h4>
+                    <h4 style="color: var(--text-primary); margin-bottom: 10px;" data-i18n="secMonitoring">Security & Monitoring</h4>
                     <span class="tag">Wireshark</span><span class="tag">Suricata</span><span class="tag">pfSense</span><span class="tag">Zabbix</span><span class="tag">Splunk</span>
                 </div>
                 <div>
-                    <h4 style="color: var(--text-primary); margin-bottom: 10px;">Infrastructure</h4>
+                    <h4 style="color: var(--text-primary); margin-bottom: 10px;" data-i18n="infrastructure">Infrastructure</h4>
                     <span class="tag">Linux</span><span class="tag">Docker</span><span class="tag">VPN</span><span class="tag">VMware</span><span class="tag">NGINX</span>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="full-width">
-            <h2><i class="fas fa-project-diagram"></i> Dự án tiêu biểu</h2>
+            <h2 data-i18n="projectsHeading"><i class="fas fa-project-diagram"></i> Dự án tiêu biểu</h2>
             <div class="project-grid">
                 
                 <div class="project-card">
                     <div class="media-container"><iframe src="https://www.youtube.com/embed/CfIdjHtFCog" allowfullscreen></iframe></div>
                     <div class="project-content">
                         <div class="project-header-box">
-                            <span class="project-title">Hệ thống Giám sát và Ngăn chặn Brute-force</span>
-                            <a href="https://github.com/tanduong9424/BruteForce-Prevention-System" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
+                            <span class="project-title" data-i18n="p1Title">Hệ thống Giám sát và Ngăn chặn Brute-force</span>
+                            <a href="https://github.com/tanduong9424/BruteForce-Prevention-System" class="project-link" target="_blank"><i class="fab fa-github"></i> <span data-i18n="details">Chi tiết</span></a>
                         </div>
-                        <p class="project-desc">Xây dựng hệ thống IDPS tự động hóa để bảo mật ứng dụng Web trên nền tảng Docker. Tự động hóa việc phát hiện và chặn IP tấn công bằng Fail2ban; giám sát trạng thái qua Zabbix và Splunk.</p>
+                        <p class="project-desc" data-i18n="p1Desc">Xây dựng hệ thống IDPS tự động hóa để bảo mật ứng dụng Web trên nền tảng Docker. Tự động hóa việc phát hiện và chặn IP tấn công bằng Fail2ban; giám sát trạng thái qua Zabbix và Splunk.</p>
                         <div class="project-tech"><i class="fas fa-tools"></i> CentOS, Docker, Fail2ban, Zabbix, Splunk.</div>
                     </div>
                 </div>
@@ -196,10 +236,10 @@
                     <div class="media-container"><img src="img/Firewall_pFSense.png" alt="Firewall" onerror="this.src='https://via.placeholder.com/1600x900/e2e8f0/0284c7?text=Firewall+pfSense'"></div>
                     <div class="project-content">
                         <div class="project-header-box">
-                            <span class="project-title">Triển khai Firewall pfSense và IDS/IPS Suricata</span>
-                            <a href="https://github.com/tanduong9424/Firewall" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
+                            <span class="project-title" data-i18n="p2Title">Triển khai Firewall pfSense và IDS/IPS Suricata</span>
+                            <a href="https://github.com/tanduong9424/Firewall" class="project-link" target="_blank"><i class="fab fa-github"></i> <span data-i18n="details">Chi tiết</span></a>
                         </div>
-                        <p class="project-desc">Xây dựng hạ tầng bảo mật trên môi trường ảo hóa. Cấu hình Suricata để giám sát lưu lượng mạng, phân tích cảnh báo xâm nhập và cấu hình phân vùng DMZ bảo vệ máy chủ.</p>
+                        <p class="project-desc" data-i18n="p2Desc">Xây dựng hạ tầng bảo mật trên môi trường ảo hóa. Cấu hình Suricata để giám sát lưu lượng mạng, phân tích cảnh báo xâm nhập và cấu hình phân vùng DMZ bảo vệ máy chủ.</p>
                         <div class="project-tech"><i class="fas fa-tools"></i> pfSense, Suricata, HAProxy, Linux.</div>
                     </div>
                 </div>
@@ -208,10 +248,10 @@
                     <div class="media-container"><iframe src="https://www.youtube.com/embed/1dm-6aczEgE" allowfullscreen></iframe></div>
                     <div class="project-content">
                         <div class="project-header-box">
-                            <span class="project-title">Mô phỏng tấn công và Phòng chống ARP Spoofing</span>
-                            <a href="https://github.com/tanduong9424/Timhieu_ARP_Spoofing" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
+                            <span class="project-title" data-i18n="p3Title">Mô phỏng tấn công và Phòng chống ARP Spoofing</span>
+                            <a href="https://github.com/tanduong9424/Timhieu_ARP_Spoofing" class="project-link" target="_blank"><i class="fab fa-github"></i> <span data-i18n="details">Chi tiết</span></a>
                         </div>
-                        <p class="project-desc">Mô phỏng kịch bản tấn công MITM trong Lab. Sử dụng Wireshark để bắt và phân tích gói tin, từ đó triển khai giải pháp phòng chống trên Switch Layer 2 (DAI, DHCP Snooping).</p>
+                        <p class="project-desc" data-i18n="p3Desc">Mô phỏng kịch bản tấn công MITM trong Lab. Sử dụng Wireshark để bắt và phân tích gói tin, từ đó triển khai giải pháp phòng chống trên Switch Layer 2 (DAI, DHCP Snooping).</p>
                         <div class="project-tech"><i class="fas fa-tools"></i> GNS3, Wireshark, Kali Linux, Cisco Switch.</div>
                     </div>
                 </div>
@@ -220,10 +260,10 @@
                     <div class="media-container"><img src="img/zabbix_giamsat_hieusuat.png" alt="Zabbix" onerror="this.src='https://via.placeholder.com/1600x900/e2e8f0/0284c7?text=Zabbix+Monitoring'"></div>
                     <div class="project-content">
                         <div class="project-header-box">
-                            <span class="project-title">Giám sát hiệu suất hạ tầng tập trung (Zabbix)</span>
-                            <a href="https://github.com/tanduong9424/ZABBIX-Performance-monitoring" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
+                            <span class="project-title" data-i18n="p4Title">Giám sát hiệu suất hạ tầng tập trung (Zabbix)</span>
+                            <a href="https://github.com/tanduong9424/ZABBIX-Performance-monitoring" class="project-link" target="_blank"><i class="fab fa-github"></i> <span data-i18n="details">Chi tiết</span></a>
                         </div>
-                        <p class="project-desc">Xây dựng hệ thống giám sát tính sẵn sàng. Thiết lập Triggers và cấu hình cảnh báo tự động qua Email khi phát hiện dấu hiệu quá tải CPU/RAM hoặc đầy ổ cứng.</p>
+                        <p class="project-desc" data-i18n="p4Desc">Xây dựng hệ thống giám sát tính sẵn sàng. Thiết lập Triggers và cấu hình cảnh báo tự động qua Email khi phát hiện dấu hiệu quá tải CPU/RAM hoặc đầy ổ cứng.</p>
                         <div class="project-tech"><i class="fas fa-tools"></i> Zabbix Server/Agent, Linux, Windows Server.</div>
                     </div>
                 </div>
@@ -232,10 +272,10 @@
                     <div class="media-container"><iframe src="https://www.youtube.com/embed/FXNRfB4K9yw" allowfullscreen></iframe></div>
                     <div class="project-content">
                         <div class="project-header-box">
-                            <span class="project-title">Triển khai hệ thống Lưu trữ tập trung (SAN)</span>
-                            <a href="https://github.com/tanduong9424/SAN_Storage" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
+                            <span class="project-title" data-i18n="p5Title">Triển khai hệ thống Lưu trữ tập trung (SAN)</span>
+                            <a href="https://github.com/tanduong9424/SAN_Storage" class="project-link" target="_blank"><i class="fab fa-github"></i> <span data-i18n="details">Chi tiết</span></a>
                         </div>
-                        <p class="project-desc">Thiết kế giải pháp SAN Storage hiệu năng cao. Thiết lập iSCSI Target trên TrueNAS SCALE, quản lý LUN và xây dựng kiến trúc sao lưu dự phòng (Replication).</p>
+                        <p class="project-desc" data-i18n="p5Desc">Thiết kế giải pháp SAN Storage hiệu năng cao. Thiết lập iSCSI Target trên TrueNAS SCALE, quản lý LUN và xây dựng kiến trúc sao lưu dự phòng (Replication).</p>
                         <div class="project-tech"><i class="fas fa-tools"></i> TrueNAS SCALE, OpenZFS, iSCSI.</div>
                     </div>
                 </div>
@@ -244,10 +284,10 @@
                     <div class="media-container"><img src="img/VPN_GRE_Tunnel.png" alt="VPN" onerror="this.src='https://via.placeholder.com/1600x900/e2e8f0/0284c7?text=VPN+GRE+Tunnel'"></div>
                     <div class="project-content">
                         <div class="project-header-box">
-                            <span class="project-title">Thiết lập VPN GRE Tunnel và IPsec</span>
-                            <a href="https://github.com/tanduong9424/VPN_GRE_TUNNEL_IPSEC" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
+                            <span class="project-title" data-i18n="p6Title">Thiết lập VPN GRE Tunnel và IPsec</span>
+                            <a href="https://github.com/tanduong9424/VPN_GRE_TUNNEL_IPSEC" class="project-link" target="_blank"><i class="fab fa-github"></i> <span data-i18n="details">Chi tiết</span></a>
                         </div>
-                        <p class="project-desc">Triển khai đường truyền mã hóa giữa các Site để bảo vệ tính bảo mật và toàn vẹn của dữ liệu trên môi trường Internet công cộng bằng thuật toán IPsec.</p>
+                        <p class="project-desc" data-i18n="p6Desc">Triển khai đường truyền mã hóa giữa các Site để bảo vệ tính bảo mật và toàn vẹn của dữ liệu trên môi trường Internet công cộng bằng thuật toán IPsec.</p>
                         <div class="project-tech"><i class="fas fa-tools"></i> Cisco Router, IPsec, GRE Tunnel, GNS3.</div>
                     </div>
                 </div>
@@ -256,10 +296,10 @@
                     <div class="media-container"><iframe src="https://www.youtube.com/embed/fdOh9TxkmKY" allowfullscreen></iframe></div>
                     <div class="project-content">
                         <div class="project-header-box">
-                            <span class="project-title">Cấu hình Load Balancing bằng Nginx</span>
-                            <a href="https://github.com/tanduong9424/Load-Balancing-NGINX" class="project-link" target="_blank"><i class="fab fa-github"></i> Chi tiết</a>
+                            <span class="project-title" data-i18n="p7Title">Cấu hình Load Balancing bằng Nginx</span>
+                            <a href="https://github.com/tanduong9424/Load-Balancing-NGINX" class="project-link" target="_blank"><i class="fab fa-github"></i> <span data-i18n="details">Chi tiết</span></a>
                         </div>
-                        <p class="project-desc">Xây dựng kiến trúc cân bằng tải nhằm nâng cao hiệu năng và độ ổn định của hệ thống Web Server trên môi trường CentOS.</p>
+                        <p class="project-desc" data-i18n="p7Desc">Xây dựng kiến trúc cân bằng tải nhằm nâng cao hiệu năng và độ ổn định của hệ thống Web Server trên môi trường CentOS.</p>
                         <div class="project-tech"><i class="fas fa-tools"></i> CentOS, Nginx.</div>
                     </div>
                 </div>
@@ -268,9 +308,9 @@
                     <div class="media-container"><iframe src="https://www.youtube.com/embed/rvCLUyPi-Yo" allowfullscreen></iframe></div>
                     <div class="project-content">
                         <div class="project-header-box">
-                            <span class="project-title">Quản trị Windows Server (Profile Management)</span>
+                            <span class="project-title" data-i18n="p8Title">Quản trị Windows Server (Profile Management)</span>
                         </div>
-                        <p class="project-desc">Cấu hình cơ chế đồng bộ Profile người dùng (Roaming/Mandatory), quản trị quyền truy cập tài nguyên qua Active Directory trong doanh nghiệp.</p>
+                        <p class="project-desc" data-i18n="p8Desc">Cấu hình cơ chế đồng bộ Profile người dùng (Roaming/Mandatory), quản trị quyền truy cập tài nguyên qua Active Directory trong doanh nghiệp.</p>
                         <div class="project-tech"><i class="fas fa-tools"></i> Windows Server, Active Directory.</div>
                     </div>
                 </div>
@@ -282,6 +322,7 @@
 
 <script>
     const themeToggle = document.getElementById('theme-toggle');
+    const langToggle = document.getElementById('lang-toggle');
     const body = document.body;
 
     // 1. Logic chuyển đổi Theme (Mặc định là Light)
@@ -301,9 +342,110 @@
         // Nếu cuộn quá 300px (vượt qua header) thì ẩn nút
         if (window.scrollY > 300) {
             themeToggle.classList.add('hidden');
+            langToggle.classList.add('hidden');
         } else {
             themeToggle.classList.remove('hidden');
+            langToggle.classList.remove('hidden');
         }
+    });
+
+    const translations = {
+        en: {
+            pageTitle: 'Huỳnh Tấn Dương - System & Security Portfolio',
+            roleTitle: 'System & Security Intern',
+            city: 'Ho Chi Minh City',
+            email: 'huynhtanduongit@gmail.com',
+            phone: '0373.148.245',
+            objectiveHeading: 'Career Objective',
+            objectiveText: "I am a final-year student majoring in Computer Engineering with a strong foundation in Networking and Computer Systems. I aim to develop my career in <strong>Cyber Security</strong>. I am seeking internships as a <strong>SOC Intern</strong> or <strong>System Administration Intern</strong> to apply skills in system monitoring, log analysis, operating IDS/IPS (Suricata, pfSense), and to gain practical experience in incident response within enterprise environments.",
+            educationHeading: 'Education',
+            university: 'Saigon University',
+            skillsHeading: 'Technical Skills',
+            secMonitoring: 'Security & Monitoring',
+            infrastructure: 'Infrastructure',
+            projectsHeading: 'Featured Projects',
+            p1Title: 'Brute-Force Detection and Prevention System',
+            p1Desc: 'Built an automated IDPS to secure web applications on Docker. Automated detection and blocking of attacking IPs using Fail2ban; monitored status with Zabbix and Splunk.',
+            p2Title: 'pfSense Firewall and Suricata IDS/IPS Deployment',
+            educationDate: '09/2022 - Present',
+            degree: 'Bachelor of Information Technology - Major in Computer Engineering',
+            p2Desc: 'Deployed security infrastructure in a virtualized environment. Configured Suricata to monitor network traffic, analyze intrusion alerts, and set up a DMZ to protect servers.',
+            p3Title: 'ARP Spoofing Simulation and Mitigation',
+            p3Desc: 'Simulated MITM attack scenarios in a lab. Used Wireshark to capture and analyze packets, then implemented mitigations on Layer 2 switches (DAI, DHCP Snooping).',
+            p4Title: 'Centralized Infrastructure Performance Monitoring (Zabbix)',
+            p4Desc: 'Built availability monitoring with triggers and automated email alerts for CPU/RAM spikes and disk capacity issues.',
+            p5Title: 'Enterprise SAN Storage Deployment',
+            p5Desc: 'Designed high-performance SAN solutions. Configured iSCSI targets on TrueNAS SCALE, managed LUNs, and implemented replication for backups.',
+            p6Title: 'VPN GRE Tunnel and IPsec Setup',
+            p6Desc: 'Deployed encrypted site-to-site tunnels to protect confidentiality and integrity using IPsec.',
+            p7Title: 'Load Balancing with Nginx',
+            p7Desc: 'Implemented load balancing architecture to improve performance and stability of web servers on CentOS.',
+            p8Title: 'Windows Server Administration (Profile Management)',
+            p8Desc: 'Configured user profile synchronization (Roaming/Mandatory) and managed resource access through Active Directory.',
+            details: 'Details'
+        },
+        vi: {
+            pageTitle: document.title,
+            roleTitle: 'Thực tập sinh System & Security',
+            city: 'TP. Hồ Chí Minh',
+            email: 'huynhtanduongit@gmail.com',
+            phone: '0373.148.245',
+            objectiveHeading: 'Mục tiêu nghề nghiệp',
+            objectiveText: document.querySelector('[data-i18n="objectiveText"]').innerHTML,
+            educationHeading: 'Học vấn',
+            university: 'Đại học Sài Gòn',
+            skillsHeading: 'Kỹ năng chuyên môn',
+            secMonitoring: 'Security & Monitoring',
+            infrastructure: 'Infrastructure',
+            projectsHeading: 'Dự án tiêu biểu',
+            educationDate: document.querySelector('[data-i18n="educationDate"]').innerText,
+            degree: document.querySelector('[data-i18n="degree"]').innerText,
+            p1Title: document.querySelector('[data-i18n="p1Title"]').innerText,
+            p1Desc: document.querySelector('[data-i18n="p1Desc"]').innerText,
+            p2Title: document.querySelector('[data-i18n="p2Title"]').innerText,
+            p2Desc: document.querySelector('[data-i18n="p2Desc"]').innerText,
+            p3Title: document.querySelector('[data-i18n="p3Title"]').innerText,
+            p3Desc: document.querySelector('[data-i18n="p3Desc"]').innerText,
+            p4Title: document.querySelector('[data-i18n="p4Title"]').innerText,
+            p4Desc: document.querySelector('[data-i18n="p4Desc"]').innerText,
+            p5Title: document.querySelector('[data-i18n="p5Title"]').innerText,
+            p5Desc: document.querySelector('[data-i18n="p5Desc"]').innerText,
+            p6Title: document.querySelector('[data-i18n="p6Title"]').innerText,
+            p6Desc: document.querySelector('[data-i18n="p6Desc"]').innerText,
+            p7Title: document.querySelector('[data-i18n="p7Title"]').innerText,
+            p7Desc: document.querySelector('[data-i18n="p7Desc"]').innerText,
+            p8Title: document.querySelector('[data-i18n="p8Title"]').innerText,
+            p8Desc: document.querySelector('[data-i18n="p8Desc"]').innerText,
+            details: document.querySelector('[data-i18n="details"]').innerText
+        }
+    };
+
+    function setLanguage(lang) {
+        const els = document.querySelectorAll('[data-i18n]');
+        els.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const txt = translations[lang] && translations[lang][key];
+            if (!txt) return;
+            // preserve leading icon if exists
+            const icon = el.querySelector('i');
+            if (icon) {
+                el.innerHTML = icon.outerHTML + ' ' + txt;
+            } else {
+                el.innerHTML = txt;
+            }
+        });
+        document.title = translations[lang].pageTitle || document.title;
+        langToggle.innerText = (lang === 'en') ? 'EN' : 'VI';
+        localStorage.setItem('lang', lang);
+    }
+
+    // init language from localStorage or default vi
+    const currentLang = localStorage.getItem('lang') || 'vi';
+    setLanguage(currentLang);
+
+    langToggle.addEventListener('click', () => {
+        const next = (localStorage.getItem('lang') === 'en') ? 'vi' : 'en';
+        setLanguage(next);
     });
 </script>
 
