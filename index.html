@@ -53,11 +53,24 @@ h2{font-size:19px;font-weight:700}
 h2[data-i="hObj"]:before{content:"\f0eb"}
 h2[data-i="hEdu"]:before{content:"\f19d"}
 h2[data-i="hSkills"]:before{content:"\f7d9"}
+h2[data-i="hExperience"]:before{content:"\f0b1"}
 h2.proj-h:before{content:"\f542"}
-h2[data-i="hObj"]:before,h2[data-i="hEdu"]:before,h2[data-i="hSkills"]:before,h2.proj-h:before{margin-right:8px;color:var(--accent);font:900 .9em "Font Awesome 6 Free"}
+h2[data-i="hObj"]:before,h2[data-i="hEdu"]:before,h2[data-i="hSkills"]:before,h2[data-i="hExperience"]:before,h2.proj-h:before{margin-right:8px;color:var(--accent);font:900 .9em "Font Awesome 6 Free"}
 .sec p{margin-top:6px;line-height:1.55}
 .edu-top{display:flex;justify-content:space-between;gap:12px}
 .edu-top .d{color:var(--muted);font-size:12px;white-space:nowrap;margin-right:-20px;padding-top:2px}
+.experience-entry h2{margin:0}
+.experience-entry-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-top:14px}
+.experience-entry-top h3{font-size:15px}
+.experience-company{margin-top:2px;color:var(--accent2);font-weight:600}
+.experience-date{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;white-space:nowrap}
+.experience-description{max-width:900px;color:var(--muted)}
+.experience-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+.experience-photo{position:relative;min-width:0;overflow:hidden;aspect-ratio:16/8.5;border:1px solid var(--line);border-radius:12px;background:var(--chip)}
+.experience-photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.experience-photo:hover img{transform:scale(1.025)}
+.experience-photo figcaption{position:absolute;right:10px;bottom:10px;left:10px;width:fit-content;padding:6px 10px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(28,27,23,.76);color:#fffaf2;font-size:11px;font-weight:600;backdrop-filter:blur(6px)}
+.experience-photo figcaption i{margin-right:5px}
 .sub{font-weight:600;font-size:14.5px;margin-top:8px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 .chip{background:var(--chip);color:var(--accent);border-radius:999px;padding:3px 13px;font-size:12.5px;font-weight:500}
@@ -106,6 +119,8 @@ footer a{color:var(--accent);font-weight:600}
   .hero-l{padding:0}
   .sec{padding:18px;margin-top:16px}
   .edu-top .d{margin-right:0}
+  .experience-entry-top{flex-direction:column;gap:6px}
+  .experience-gallery{grid-template-columns:1fr;gap:10px}
   footer{flex-direction:column;gap:6px}
 }
 </style>
@@ -166,6 +181,28 @@ footer a{color:var(--accent);font-weight:600}
       </div>
     </div>
   </div>
+
+  <section class="sec experience-entry" aria-labelledby="experience-title">
+    <h2 id="experience-title" data-i="hExperience">Kinh nghiệm làm việc</h2>
+    <div class="experience-entry-top">
+      <div>
+        <h3 data-i="experienceRole">Thực tập sinh IT System Support</h3>
+        <p class="experience-company">VNetwork</p>
+      </div>
+      <span class="experience-date"><i class="fa-regular fa-calendar" aria-hidden="true"></i><span data-i="experienceDates">05/2026 – 10/2026 · 6 tháng</span></span>
+    </div>
+    <p class="experience-description" data-i="experienceDetails">Hỗ trợ khách hàng và troubleshooting các vấn đề liên quan đến CDN, email server, email gateway, WAF, VPS và SSL.</p>
+    <div class="experience-gallery" role="group" aria-label="Hình ảnh tại VNetwork">
+      <figure class="experience-photo">
+        <img src="img/vnet1.jpg" alt="Trung tâm vận hành an ninh mạng VNetwork" loading="lazy">
+        <figcaption><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span data-i="experiencePhotoSoc">Trung tâm vận hành an ninh mạng</span></figcaption>
+      </figure>
+      <figure class="experience-photo">
+        <img src="img/vnet2.jpg" alt="Kỹ thuật viên kiểm tra máy chủ tại VNetwork" loading="lazy">
+        <figcaption><i class="fa-solid fa-server" aria-hidden="true"></i><span data-i="experiencePhotoServer">Vận hành máy chủ</span></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="sec" id="skills">
     <h2 data-i="hSkills">Skills</h2>
@@ -282,7 +319,13 @@ const EN = {
   objText:'Seeking <strong>Network/NOC Intern</strong> roles first, followed by <strong>System Administration Intern</strong> roles. Ready to apply TCP/IP, routing and switching, VLAN, DNS, VPN and firewall fundamentals to network operations, monitoring and troubleshooting while growing Linux/Windows Server administration skills.',
   hEdu:'Education', uni:'Saigon University',
   degree:'Bachelor of Information Technology — Major in Computer Engineering',
-  present:'Present', hSkills:'Skills',
+  present:'Present', hExperience:'Work Experience',
+  experienceRole:'IT System Support Intern',
+  experienceDates:'May 2026 – Oct 2026 · 6 months',
+  experienceDetails:'Supported customers and troubleshot issues involving CDN, email servers, email gateways, WAF, VPS, and SSL.',
+  experiencePhotoSoc:'Security operations center',
+  experiencePhotoServer:'Server operations',
+  hSkills:'Skills',
   s2Title:'Networking & Infrastructure',
   s2Details:'<strong>Routing & Switching:</strong> TCP/IP, UDP, VLAN, BGP, OSPF, mLAG, LACP (Arista/Nexus).<br><strong>DNS & Protocols:</strong> A/AAAA/CNAME/MX/TXT/NS/SRV; SPF/DKIM/DMARC/PTR; HTTP/2/3, QUIC, SMTP, POP3, IMAP.<br><strong>VPN & Diagnostics:</strong> GRE/IPsec; nslookup, dig, traceroute, MTR, telnet, Wireshark.',
   s1Title:'System & Server Administration',

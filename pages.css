@@ -88,6 +88,21 @@ h1 { margin: 5px 0 0; font-size: clamp(26px, 3vw, 36px); line-height: 1.2; }
   background: var(--surface);
   box-shadow: 0 10px 28px rgba(70, 48, 20, .045);
 }
+.experience-card { padding: 22px 24px; border-left: 3px solid var(--accent); }
+.experience-heading { display: flex; align-items: center; gap: 10px; color: var(--accent); }
+.experience-heading i { font-size: 16px; }
+.experience-heading h2 { margin: 0; color: var(--text); font-size: 17px; }
+.experience-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-top: 16px; }
+.experience-top h3 { margin: 0; font-size: 15px; }
+.experience-company { margin: 3px 0 0; color: var(--accent2); font-weight: 600; }
+.experience-date { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; white-space: nowrap; }
+.experience-description { margin: 10px 0 0; color: var(--muted); }
+.experience-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.experience-photo { position: relative; min-width: 0; overflow: hidden; aspect-ratio: 16 / 8.5; border: 1px solid var(--line); border-radius: 12px; background: var(--chip); }
+.experience-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.experience-photo:hover img { transform: scale(1.025); }
+.experience-photo figcaption { position: absolute; right: 10px; bottom: 10px; left: 10px; width: fit-content; padding: 6px 10px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; background: rgba(28, 27, 23, .76); color: #fffaf2; font-size: 11px; font-weight: 600; backdrop-filter: blur(6px); }
+.experience-photo figcaption i { margin-right: 5px; }
 .skill-grid, .project-grid, .contact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .skill-grid { counter-reset: skill; }
 .skill-card, .project-card { padding: 22px; }
@@ -186,6 +201,8 @@ footer b { color: var(--text); font-size: 13px; }
   .nav-r { gap: 10px; }
   .page-intro { margin-top: 14px; padding: 22px 20px; }
   .skill-grid, .project-grid, .contact-grid { grid-template-columns: 1fr; }
+  .experience-top { flex-direction: column; gap: 6px; }
+  .experience-gallery { grid-template-columns: 1fr; gap: 10px; }
   .education-top { flex-direction: column; gap: 4px; }
   .education-gallery { grid-template-columns: 1fr; }
   .education-photo { height: clamp(170px, 54vw, 260px); }
