@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Huỳnh Tấn Dương - System & Security Portfolio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fffbe6; --text:#1e293b; --muted:#6b7280; --line:#f3dfc6;
+  --accent:#b45309; --accent2:#ea580c; --chip:#fef3c7; --btn-text:#fff;
+}
+body.dark{
+  --bg:#1a1410; --text:#f5efe6; --muted:#a8a095; --line:#3a2e22;
+  --accent:#fb923c; --accent2:#fdba74; --chip:#3a2a14; --btn-text:#1a1410;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;font-size:14px;transition:background .3s,color .3s}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:924px;margin:0 auto;padding:0 40px}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0 14px;border-bottom:1px solid var(--line)}
+.brand{font-weight:700;color:var(--accent);font-size:14px}
+.nav-r{display:flex;align-items:center;gap:16px}
+.nav-r a.l{font-weight:500;font-size:13px}
+.pill{border:1px solid var(--accent2);color:var(--accent);background:transparent;border-radius:999px;padding:4px 14px;font:600 12px 'Inter',sans-serif;cursor:pointer}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:start;padding-top:28px;position:relative}
+.hero-l{padding-top:28px}
+.eyebrow{color:var(--accent2);font-weight:500;letter-spacing:.08em;font-size:13px;text-transform:uppercase}
+h1{font-size:30px;line-height:1.15;font-weight:700;margin-top:4px}
+.tagline{color:var(--muted);font-size:14px;margin-top:6px;max-width:370px;line-height:1.55}
+.cta{display:flex;align-items:center;gap:12px;margin-top:16px}
+.btn{background:var(--accent);color:var(--btn-text);font-weight:600;font-size:13px;padding:9px 16px;border-radius:8px}
+.ulink{color:var(--accent);font-weight:600;font-size:13px;border-bottom:1px solid var(--line)}
+.loc{color:var(--muted);margin-top:10px;font-size:14px}
+.hero-r{margin-right:-40px}
+.photo{height:215px;width:100%;object-fit:cover;object-position:center 20%;display:block;
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 14%,#000 100%),linear-gradient(to bottom,transparent,#000 8%,#000 80%,transparent);
+  -webkit-mask-composite:source-in;mask-composite:intersect;
+  mask-image:linear-gradient(to right,transparent,#000 14%,#000 100%),linear-gradient(to bottom,transparent,#000 8%,#000 80%,transparent)}
+.caption{text-align:center;color:var(--muted);font-size:12px;margin-top:8px;padding-right:40px}
+
+/* SECTIONS */
+.sec{border-top:1px solid var(--line);margin-top:26px;padding-top:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+h2{font-size:19px;font-weight:700}
+.sec p{margin-top:6px;line-height:1.55}
+.edu-top{display:flex;justify-content:space-between;gap:12px}
+.edu-top .d{color:var(--muted);font-size:12px;white-space:nowrap;margin-right:-20px;padding-top:2px}
+.sub{font-weight:600;font-size:14.5px;margin-top:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{background:var(--chip);color:var(--accent);border-radius:999px;padding:3px 13px;font-size:12.5px;font-weight:500}
+
+/* PROJECTS */
+.proj-h{margin-bottom:6px}
+.projects{display:grid;grid-template-columns:1fr 1fr;column-gap:26px}
+.p{border-top:1px solid var(--line);padding:8px 0 10px}
+.p h3{font-size:14.5px;font-weight:600}
+.p .desc{color:var(--muted);font-size:12.5px;line-height:1.5;margin-top:3px}
+.p .tech{color:var(--muted);font-weight:600;font-size:12px;margin-top:4px}
+.project-image{margin-top:8px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:var(--chip)}
+.project-image img{width:100%;height:100%;object-fit:contain;display:block}
+.act{display:inline-block;margin-top:6px;color:var(--accent2);font-weight:600;font-size:12.5px;cursor:pointer;list-style:none}
+.video-cover{position:relative;display:block;margin-top:8px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:#000}
+.video-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+.video-cover:hover img{transform:scale(1.03)}
+.video-cover-label{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:13px;font-weight:600;background:rgba(0,0,0,.18);text-shadow:0 1px 5px rgba(0,0,0,.8)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);margin-top:90px;padding:14px 0 30px;display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+footer b{color:var(--text);font-size:13.5px}
+footer a{color:var(--accent);font-weight:600}
+
+@media(max-width:760px){
+  .wrap{padding:0 20px}
+  .nav{flex-wrap:wrap;gap:10px}
+  .nav-r{flex-wrap:wrap;gap:10px}
+  .hero,.grid2,.projects{grid-template-columns:1fr}
+  .hero-r{margin:0;order:-1}
+  .hero-l{padding-top:0}
+  .caption{padding-right:0}
+  .edu-top .d{margin-right:0}
+  footer{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <a href="#top" class="brand">HTD · Portfolio</a>
+    <div class="nav-r">
+      <a class="l" href="#objective" data-i="nObj">Objective</a>
+      <a class="l" href="#education" data-i="nEdu">Education</a>
+      <a class="l" href="#skills" data-i="nSkills">Skills</a>
+      <a class="l" href="#projects" data-i="nProj">Projects</a>
+      <a class="l" href="#contact" data-i="nContact">Contact</a>
+      <button class="pill" id="langBtn">VI / EN</button>
+      <button class="pill" id="themeBtn">◐ Theme</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-l">
+      <div class="eyebrow" data-i="role">System & Security Intern</div>
+      <h1>Huỳnh Tấn Dương</h1>
+      <p class="tagline" data-i="tagline">Final-year Computer Engineering student who builds and hardens homelab networks — firewalls, monitoring pipelines and defensive security labs.</p>
+      <div class="cta">
+        <a class="btn" href="mailto:huynhtanduongit@gmail.com" data-i="emailMe">Email me</a>
+        <a class="ulink" href="https://github.com/tanduong9424" target="_blank" rel="noopener">GitHub</a>
+        <a class="ulink" href="https://www.linkedin.com/in/huỳnh-tấn-dương-b003352ab" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="loc"><span data-i="city">TP. Hồ Chí Minh</span> · 0373.148.245</div>
+    </div>
+    <div class="hero-r">
+      <!-- Đặt ảnh chân dung vào img/avatar.jpg -->
+      <img class="photo" src="img/avatar.jpg" alt="Huỳnh Tấn Dương" onerror="this.style.visibility='hidden'">
+      <div class="caption"><span>Huỳnh Tấn Dương — </span><span data-i="city2">TP. Hồ Chí Minh</span></div>
+    </div>
+  </header>
+
+  <div class="sec grid2" id="objective" style="margin-top:34px">
+    <div>
+      <h2 data-i="hObj">Objective</h2>
+      <p data-i="objText">Ứng tuyển vị trí <strong>SOC Intern</strong> hoặc <strong>System Administration Intern</strong>. Quan tâm đến cyber security, system monitoring, log analysis, IDS/IPS và học hỏi quy trình incident response trong môi trường vận hành thực tế.</p>
+    </div>
+    <div id="education">
+      <h2 data-i="hEdu">Education</h2>
+      <div class="edu-top">
+        <div>
+          <div class="sub" style="margin-top:6px" data-i="uni">Đại học Sài Gòn (Saigon University)</div>
+          <p style="margin-top:2px" data-i="degree">Kỹ sư Công nghệ Thông tin — chuyên ngành Kỹ thuật Máy tính</p>
+        </div>
+        <span class="d">09/2022 – <span data-i="present">Present</span></span>
+      </div>
+      <p>GPA 3.39 / 4.0 · 8.39 / 10</p>
+    </div>
+  </div>
+
+  <div class="sec" id="skills">
+    <h2 data-i="hSkills">Skills</h2>
+    <div class="grid2" style="margin-top:4px">
+      <div>
+        <div class="sub">Security & Monitoring</div>
+        <div class="chips"><span class="chip">Wireshark</span><span class="chip">Suricata</span><span class="chip">pfSense</span><span class="chip">Zabbix</span><span class="chip">Splunk</span></div>
+      </div>
+      <div>
+        <div class="sub">Infrastructure</div>
+        <div class="chips"><span class="chip">Linux</span><span class="chip">Docker</span><span class="chip">VPN</span><span class="chip">VMware</span><span class="chip">NGINX</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" id="projects">
+    <h2 class="proj-h" data-i="hProj">Projects — System & Security</h2>
+    <div class="projects">
+
+      <div class="p">
+        <h3>Brute-force Detection and Prevention</h3>
+        <div class="desc" data-i="p1">Detect SSH brute-force attacks và tự động chặn IP nguồn bằng fail2ban-style rules; xem video demo dưới.</div>
+        <div class="tech">Linux · Logging</div>
+        <a class="video-cover" href="https://www.youtube.com/watch?v=CfIdjHtFCog" target="_blank" rel="noopener noreferrer" aria-label="Watch brute-force detection demo on YouTube"><img src="https://i.ytimg.com/vi/CfIdjHtFCog/hqdefault.jpg" alt="" loading="lazy"><span class="video-cover-label">▶ Watch demo</span></a>
+      </div>
+
+      <div class="p">
+        <h3>pfSense Firewall và Suricata IDS/IPS</h3>
+        <div class="desc" data-i="p2">Triển khai pfSense làm edge firewall, tích hợp Suricata ở chế độ IPS để chặn lưu lượng độc hại theo thời gian thực.</div>
+        <div class="tech">pfSense · Suricata</div>
+        <a class="act" href="https://github.com/tanduong9424/Firewall" target="_blank" rel="noopener">▶ Watch demo</a>
+        <div class="project-image"><img src="img/Firewall_pFSense.png" alt="Sơ đồ hệ thống pfSense, DMZ và các máy chủ CentOS" loading="lazy"></div>
+      </div>
+
+      <div class="p">
+        <h3>ARP Spoofing</h3>
+        <div class="desc" data-i="p3">Mô phỏng tấn công ARP spoofing trong lab, phát hiện bằng Wireshark và phòng vệ bằng dynamic ARP inspection.</div>
+        <div class="tech">Wireshark · Switch security</div>
+        <a class="video-cover" href="https://www.youtube.com/watch?v=1dm-6aczEgE" target="_blank" rel="noopener noreferrer" aria-label="Watch ARP spoofing demo on YouTube"><img src="https://i.ytimg.com/vi/1dm-6aczEgE/hqdefault.jpg" alt="" loading="lazy"><span class="video-cover-label">▶ Watch demo</span></a>
+      </div>
+
+      <div class="p">
+        <h3>Zabbix Infrastructure Monitoring</h3>
+        <div class="desc" data-i="p4">Theo dõi tình trạng host, service và tài nguyên bằng Zabbix; cấu hình trigger, cảnh báo và dashboard trực quan.</div>
+        <div class="tech">Zabbix · Linux</div>
+        <a class="act" href="https://github.com/tanduong9424/ZABBIX-Performance-monitoring" target="_blank" rel="noopener">▶ Watch demo</a>
+        <div class="project-image"><img src="img/zabbix_giamsat_hieusuat.png" alt="Dashboard Zabbix theo dõi CPU, RAM và các cảnh báo hệ thống" loading="lazy"></div>
+      </div>
+
+      <div class="p">
+        <h3>Centralized SAN Storage</h3>
+        <div class="desc" data-i="p5">Xây dựng hệ thống lưu trữ tập trung SAN, chia sẻ LUN tới nhiều server và cấu hình multipath để tăng độ sẵn sàng.</div>
+        <div class="tech">SAN · iSCSI</div>
+        <a class="act" href="https://github.com/tanduong9424/SAN_Storage" target="_blank" rel="noopener">Source</a>
+        <a class="video-cover" href="https://www.youtube.com/watch?v=FXNRfB4K9yw" target="_blank" rel="noopener noreferrer" aria-label="Watch SAN storage demo on YouTube"><img src="https://i.ytimg.com/vi/FXNRfB4K9yw/hqdefault.jpg" alt="" loading="lazy"><span class="video-cover-label">▶ Watch demo</span></a>
+      </div>
+
+      <div class="p">
+        <h3>VPN GRE Tunnel và IPsec</h3>
+        <div class="desc" data-i="p6">Thiết lập GRE tunnel giữa hai site và mã hóa bằng IPsec, so sánh hiệu năng và bảo mật của hai phương án.</div>
+        <div class="tech">GRE · IPsec · Router</div>
+        <a class="act" href="https://github.com/tanduong9424/VPN_GRE_TUNNEL_IPSEC" target="_blank" rel="noopener">▶ Watch demo</a>
+        <div class="project-image"><img src="img/VPN_GRE_Tunnel.png" alt="Sơ đồ GRE tunnel mã hóa IPsec kết nối hai site" loading="lazy"></div>
+      </div>
+
+      <div class="p">
+        <h3>Load Balancing with Nginx</h3>
+        <div class="desc" data-i="p7">Cân bằng tải HTTP giữa nhiều backend server bằng Nginx upstream, health check và thuật toán round-robin.</div>
+        <div class="tech">NGINX · Linux</div>
+        <a class="act" href="https://github.com/tanduong9424/Load-Balancing-NGINX" target="_blank" rel="noopener">Source</a>
+        <a class="video-cover" href="https://www.youtube.com/watch?v=fdOh9TxkmKY" target="_blank" rel="noopener noreferrer" aria-label="Watch Nginx load balancing demo on YouTube"><img src="https://i.ytimg.com/vi/fdOh9TxkmKY/hqdefault.jpg" alt="" loading="lazy"><span class="video-cover-label">▶ Watch demo</span></a>
+      </div>
+
+      <div class="p">
+        <h3>Windows Server Profile Management</h3>
+        <div class="desc" data-i="p8">Quản lý user profile và roaming profile trên Windows Server, chuẩn hóa môi trường người dùng qua Group Policy.</div>
+        <div class="tech">Windows Server · GPO</div>
+        <a class="act" href="https://www.youtube.com/watch?v=rvCLUyPi-Yo" target="_blank" rel="noopener">Source</a>
+        <a class="video-cover" href="https://www.youtube.com/watch?v=rvCLUyPi-Yo" target="_blank" rel="noopener noreferrer" aria-label="Watch Windows Server profile management demo on YouTube"><img src="https://i.ytimg.com/vi/rvCLUyPi-Yo/hqdefault.jpg" alt="" loading="lazy"><span class="video-cover-label">▶ Watch demo</span></a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer id="contact">
+    <div><b>Contact</b> · <a href="mailto:huynhtanduongit@gmail.com">huynhtanduongit@gmail.com</a> · <a href="tel:0373148245">0373.148.245</a> · <a href="https://github.com/tanduong9424" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/huỳnh-tấn-dương-b003352ab" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div id="year"></div>
+  </footer>
+</div>
+
+<script>
+const EN = {
+  nObj:'Objective', nEdu:'Education', nSkills:'Skills', nProj:'Projects', nContact:'Contact',
+  role:'System & Security Intern',
+  tagline:'Final-year Computer Engineering student who builds and hardens homelab networks — firewalls, monitoring pipelines and defensive security labs.',
+  emailMe:'Email me', city:'Ho Chi Minh City', city2:'Ho Chi Minh City',
+  hObj:'Objective',
+  objText:'Applying for <strong>SOC Intern</strong> or <strong>System Administration Intern</strong> roles. Interested in cyber security, system monitoring, log analysis, IDS/IPS, and learning incident response in real operating environments.',
+  hEdu:'Education', uni:'Saigon University',
+  degree:'Bachelor of Information Technology — Major in Computer Engineering',
+  present:'Present', hSkills:'Skills', hProj:'Projects — System & Security',
+  p1:'Detect SSH brute-force attacks and automatically block source IPs with fail2ban-style rules; see the demo video below.',
+  p2:'Deployed pfSense as an edge firewall with Suricata in IPS mode to block malicious traffic in real time.',
+  p3:'Simulated ARP spoofing attacks in a lab, detected with Wireshark and mitigated with dynamic ARP inspection.',
+  p4:'Monitored host, service and resource health with Zabbix; configured triggers, alerts and visual dashboards.',
+  p5:'Built centralized SAN storage, sharing LUNs to multiple servers and configuring multipath for higher availability.',
+  p6:'Set up a GRE tunnel between two sites and encrypted it with IPsec, comparing performance and security of both.',
+  p7:'Load-balanced HTTP across multiple backend servers with Nginx upstream, health checks and round-robin.',
+  p8:'Managed user and roaming profiles on Windows Server, standardizing the user environment via Group Policy.'
+};
+const VI = {};
+document.querySelectorAll('[data-i]').forEach(e => VI[e.dataset.i] = e.innerHTML);
+
+const body = document.body;
+function setLang(l){
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i]').forEach(e => {
+    const t = (l === 'en' ? EN : VI)[e.dataset.i];
+    if (t != null) e.innerHTML = t;
+  });
+  try{ localStorage.setItem('lang', l); }catch(e){}
+}
+let lang = 'vi', theme = 'light';
+try{ lang = localStorage.getItem('lang') || 'vi'; theme = localStorage.getItem('theme') || 'light'; }catch(e){}
+if (theme === 'dark') body.classList.add('dark');
+if (lang === 'en') setLang('en');
+
+document.getElementById('langBtn').onclick = () => { lang = lang === 'vi' ? 'en' : 'vi'; setLang(lang); };
+document.getElementById('themeBtn').onclick = () => {
+  body.classList.toggle('dark');
+  try{ localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light'); }catch(e){}
+};
+document.getElementById('year').textContent = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+</script>
+</body>
+</html>

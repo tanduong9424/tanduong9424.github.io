@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects — Huỳnh Tấn Dương</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="pages.css">
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="index2.html" class="brand"><i class="fa-solid fa-network-wired" aria-hidden="true"></i>HTD · Portfolio</a>
+      <div class="nav-r">
+        <a href="index2.html#objective"><i class="fa-solid fa-house" aria-hidden="true"></i><span data-vi="Trang chủ" data-en="Home">Trang chủ</span></a>
+        <a href="education.html"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span data-vi="Học vấn" data-en="Education">Học vấn</span></a>
+        <a href="skills.html"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><span data-vi="Kỹ năng" data-en="Skills">Kỹ năng</span></a>
+        <a href="projects.html" aria-current="page"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i><span data-vi="Dự án" data-en="Projects">Dự án</span></a>
+        <a href="contact.html"><i class="fa-regular fa-address-card" aria-hidden="true"></i><span data-vi="Liên hệ" data-en="Contact">Liên hệ</span></a>
+        <button class="pill" id="langBtn" type="button"><i class="fa-solid fa-language" aria-hidden="true"></i>VI / EN</button>
+        <button class="pill" id="themeBtn" type="button"><i class="fa-regular fa-moon" aria-hidden="true"></i><span data-vi="Giao diện" data-en="Theme">Giao diện</span></button>
+      </div>
+    </nav>
+    <header class="page-intro">
+      <div class="eyebrow"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> <span data-vi="Network trước · Systems tiếp theo" data-en="Network first · Systems next">Network trước · Systems tiếp theo</span></div>
+      <h1><i class="fa-solid fa-diagram-project" aria-hidden="true"></i><span data-vi="Dự án" data-en="Projects">Dự án</span></h1>
+      <p class="lead" data-vi="Các lab mạng được ưu tiên trước, tiếp theo là giám sát và quản trị hạ tầng hệ thống." data-en="Network labs are highlighted first, followed by infrastructure monitoring and systems administration.">Các lab mạng được ưu tiên trước, tiếp theo là giám sát và quản trị hạ tầng hệ thống.</p>
+    </header>
+    <main class="content project-grid">
+      <article class="card project-card">
+        <h2 data-vi="Triển khai Firewall pfSense và IDS/IPS Suricata" data-en="pfSense Firewall and Suricata IDS/IPS">Triển khai Firewall pfSense và IDS/IPS Suricata</h2>
+        <p class="project-desc" data-vi="Triển khai pfSense làm firewall biên, tích hợp Suricata ở chế độ IPS và phân vùng DMZ để bảo vệ máy chủ." data-en="Deploys pfSense as an edge firewall, integrates Suricata in IPS mode and uses a DMZ to protect servers.">Triển khai pfSense làm firewall biên, tích hợp Suricata ở chế độ IPS và phân vùng DMZ để bảo vệ máy chủ.</p>
+        <div class="tech">pfSense · Suricata · HAProxy · Linux</div>
+        <div class="project-links"><a href="https://github.com/tanduong9424/Firewall" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+        <a class="media-link" href="img/Firewall_pFSense.png" target="_blank" rel="noopener noreferrer"><img src="img/Firewall_pFSense.png" alt="Sơ đồ hệ thống pfSense, DMZ và các máy chủ CentOS" loading="lazy"></a>
+      </article>
+      <article class="card project-card">
+        <h2 data-vi="Mô phỏng và Phòng chống ARP Spoofing" data-en="ARP Spoofing Simulation and Mitigation">Mô phỏng và Phòng chống ARP Spoofing</h2>
+        <p class="project-desc" data-vi="Mô phỏng tấn công MITM trong lab, phân tích gói tin bằng Wireshark và triển khai biện pháp phòng vệ trên switch Layer 2." data-en="Simulates MITM attacks in a lab, analyzes packets with Wireshark and applies Layer 2 switch defenses.">Mô phỏng tấn công MITM trong lab, phân tích gói tin bằng Wireshark và triển khai biện pháp phòng vệ trên switch Layer 2.</p>
+        <div class="tech">GNS3 · Wireshark · Kali Linux · Cisco Switch</div>
+        <div class="project-links"><a href="https://github.com/tanduong9424/Timhieu_ARP_Spoofing" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+        <a class="media-link video" href="https://www.youtube.com/watch?v=1dm-6aczEgE" target="_blank" rel="noopener noreferrer" aria-label="Watch ARP spoofing demo on YouTube"><img src="https://i.ytimg.com/vi/1dm-6aczEgE/hqdefault.jpg" alt="ARP spoofing demo" loading="lazy"><span class="play-label">▶ Watch demo</span></a>
+      </article>
+      <article class="card project-card">
+        <h2 data-vi="Thiết lập VPN GRE Tunnel và IPsec" data-en="VPN GRE Tunnel and IPsec Setup">Thiết lập VPN GRE Tunnel và IPsec</h2>
+        <p class="project-desc" data-vi="Thiết lập đường hầm GRE giữa hai site và mã hóa bằng IPsec để bảo vệ dữ liệu truyền qua Internet." data-en="Sets up a GRE tunnel between two sites and encrypts it with IPsec to protect data in transit over the Internet.">Thiết lập đường hầm GRE giữa hai site và mã hóa bằng IPsec để bảo vệ dữ liệu truyền qua Internet.</p>
+        <div class="tech">Cisco Router · IPsec · GRE Tunnel · GNS3</div>
+        <div class="project-links"><a href="https://github.com/tanduong9424/VPN_GRE_TUNNEL_IPSEC" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+        <a class="media-link" href="img/VPN_GRE_Tunnel.png" target="_blank" rel="noopener noreferrer"><img src="img/VPN_GRE_Tunnel.png" alt="Sơ đồ GRE tunnel mã hóa IPsec kết nối hai site" loading="lazy"></a>
+      </article>
+      <article class="card project-card">
+        <h2 data-vi="Cân bằng tải bằng Nginx" data-en="Load Balancing with Nginx">Cân bằng tải bằng Nginx</h2>
+        <p class="project-desc" data-vi="Phân phối lưu lượng HTTP qua nhiều backend server bằng Nginx upstream và thuật toán round-robin." data-en="Distributes HTTP traffic across multiple backend servers using Nginx upstream and round-robin balancing.">Phân phối lưu lượng HTTP qua nhiều backend server bằng Nginx upstream và thuật toán round-robin.</p>
+        <div class="tech">CentOS · Nginx</div>
+        <div class="project-links"><a href="https://github.com/tanduong9424/Load-Balancing-NGINX" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+        <a class="media-link video" href="https://www.youtube.com/watch?v=fdOh9TxkmKY" target="_blank" rel="noopener noreferrer" aria-label="Watch Nginx load balancing demo on YouTube"><img src="https://i.ytimg.com/vi/fdOh9TxkmKY/hqdefault.jpg" alt="Nginx load balancing demo" loading="lazy"><span class="play-label">▶ Watch demo</span></a>
+      </article>
+      <article class="card project-card">
+        <h2 data-vi="Giám sát Hiệu suất Hạ tầng bằng Zabbix" data-en="Infrastructure Performance Monitoring with Zabbix">Giám sát Hiệu suất Hạ tầng bằng Zabbix</h2>
+        <p class="project-desc" data-vi="Theo dõi tính sẵn sàng, thiết lập trigger và cảnh báo khi CPU/RAM quá tải hoặc dung lượng đĩa thấp." data-en="Monitors availability and configures triggers and alerts for CPU/RAM overload or low disk capacity.">Theo dõi tính sẵn sàng, thiết lập trigger và cảnh báo khi CPU/RAM quá tải hoặc dung lượng đĩa thấp.</p>
+        <div class="tech">Zabbix Server/Agent · Linux · Windows Server</div>
+        <div class="project-links"><a href="https://github.com/tanduong9424/ZABBIX-Performance-monitoring" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+        <a class="media-link" href="img/zabbix_giamsat_hieusuat.png" target="_blank" rel="noopener noreferrer"><img src="img/zabbix_giamsat_hieusuat.png" alt="Dashboard Zabbix theo dõi CPU, RAM và các cảnh báo hệ thống" loading="lazy"></a>
+      </article>
+      <article class="card project-card">
+        <h2 data-vi="Triển khai Hệ thống Lưu trữ SAN" data-en="Centralized SAN Storage Deployment">Triển khai Hệ thống Lưu trữ SAN</h2>
+        <p class="project-desc" data-vi="Thiết lập iSCSI Target trên TrueNAS SCALE, quản lý LUN và xây dựng cơ chế replication dự phòng." data-en="Configures iSCSI targets on TrueNAS SCALE, manages LUNs and sets up replication for backup.">Thiết lập iSCSI Target trên TrueNAS SCALE, quản lý LUN và xây dựng cơ chế replication dự phòng.</p>
+        <div class="tech">TrueNAS SCALE · OpenZFS · iSCSI</div>
+        <div class="project-links"><a href="https://github.com/tanduong9424/SAN_Storage" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+        <a class="media-link video" href="https://www.youtube.com/watch?v=FXNRfB4K9yw" target="_blank" rel="noopener noreferrer" aria-label="Watch SAN storage demo on YouTube"><img src="https://i.ytimg.com/vi/FXNRfB4K9yw/hqdefault.jpg" alt="SAN storage demo" loading="lazy"><span class="play-label">▶ Watch demo</span></a>
+      </article>
+      <article class="card project-card">
+        <h2 data-vi="Quản trị Windows Server — Profile Management" data-en="Windows Server Profile Management">Quản trị Windows Server — Profile Management</h2>
+        <p class="project-desc" data-vi="Cấu hình Roaming/Mandatory User Profile và quản lý quyền truy cập tài nguyên qua Active Directory." data-en="Configures roaming and mandatory user profiles and manages resource access through Active Directory.">Cấu hình Roaming/Mandatory User Profile và quản lý quyền truy cập tài nguyên qua Active Directory.</p>
+        <div class="tech">Windows Server · Active Directory · Group Policy</div>
+        <a class="media-link video" href="https://www.youtube.com/watch?v=rvCLUyPi-Yo" target="_blank" rel="noopener noreferrer" aria-label="Watch Windows Server profile management demo on YouTube"><img src="https://i.ytimg.com/vi/rvCLUyPi-Yo/hqdefault.jpg" alt="Windows Server profile management demo" loading="lazy"><span class="play-label">▶ Watch demo</span></a>
+      </article>
+      <article class="card project-card">
+        <h2 data-vi="Hệ thống Phát hiện và Ngăn chặn Brute-force" data-en="Brute-force Detection and Prevention">Hệ thống Phát hiện và Ngăn chặn Brute-force</h2>
+        <p class="project-desc" data-vi="Phát hiện SSH brute-force và tự động chặn IP nguồn bằng luật kiểu Fail2ban; theo dõi log và trạng thái hệ thống." data-en="Detects SSH brute-force attempts and blocks source IPs with Fail2ban-style rules; monitors logs and system status.">Phát hiện SSH brute-force và tự động chặn IP nguồn bằng luật kiểu Fail2ban; theo dõi log và trạng thái hệ thống.</p>
+        <div class="tech">CentOS · Docker · Fail2ban · Zabbix · Splunk</div>
+        <div class="project-links"><a href="https://github.com/tanduong9424/BruteForce-Prevention-System" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+        <a class="media-link video" href="https://www.youtube.com/watch?v=CfIdjHtFCog" target="_blank" rel="noopener noreferrer" aria-label="Watch brute-force detection demo on YouTube"><img src="https://i.ytimg.com/vi/CfIdjHtFCog/hqdefault.jpg" alt="Brute-force detection demo" loading="lazy"><span class="play-label">▶ Watch demo</span></a>
+      </article>
+    </main>
+    <footer><div><b>HTD · Portfolio</b> · <span data-vi="Dự án" data-en="Projects">Dự án</span></div><div id="year"></div></footer>
+  </div>
+  <script src="pages.js"></script>
+</body>
+</html>
