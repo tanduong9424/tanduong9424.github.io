@@ -219,7 +219,12 @@ uploadButton.addEventListener('click', async () => {
     return;
   }
   uploadButton.disabled = true;
-  const path = `${currentUser.id}/${crypto.randomUUID()}.${extension}`;
+  const safeName = file.name
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9._-]+/g, '-')
+    .replace(/^-+|-+$/g, '') || `document.${extension}`;
+  const path = `${currentUser.id}/${crypto.randomUUID()}-${safeName}`;
   const contentType = extension === 'pdf'
     ? 'application/pdf'
     : extension === 'txt' ? 'text/plain' : 'text/markdown';

@@ -223,11 +223,28 @@ footer b { color: var(--text); font-size: 13px; }
 .document-markdown th, .document-markdown td { padding: 7px; border: 1px solid var(--line); text-align: left; }
 .document-empty { display: grid; min-height: 420px; place-items: center; padding: 24px; color: var(--muted); text-align: center; }
 .document-empty i { display: block; margin-bottom: 10px; color: var(--accent); font-size: 28px; }
+.document-preview iframe { min-width: 0; }
+.documents-page .upload-control input { min-width: 0; max-width: 100%; font-size: 12px; }
+.documents-page .documents-panel, .documents-page .document-viewer { min-width: 0; }
 @media (min-width: 1100px) {
   .skill-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
+  .documents-page .wrap { padding: 0 12px; }
+  .documents-page .nav { margin-top: 8px; padding: 12px; }
+  .documents-page .nav-r { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .documents-page .nav-r > * { min-width: 0; }
+  .documents-page .nav-r a { padding: 7px 5px; border: 1px solid var(--line); border-radius: 8px; text-align: center; font-size: 11px; }
+  .documents-page .nav-r a i { margin-right: 4px; }
+  .documents-page .pill { min-height: 34px; padding: 5px 8px; }
+  .documents-page .page-intro { padding: 20px 16px; }
+  .documents-page .documents-panel, .documents-page .document-viewer { padding: 16px; }
+  .documents-page .documents-form input, .documents-page .upload-control { font-size: 14px; }
+  .documents-page .documents-button { min-height: 42px; }
+  .documents-page .document-preview { min-height: 260px; }
+  .documents-page .document-preview iframe { height: 68svh; min-height: 360px; }
+  .documents-page .document-markdown { padding: 14px; }
   .wrap { padding: 0 20px; }
   .nav { flex-wrap: wrap; gap: 10px; padding: 12px 14px; }
   .nav-r { gap: 10px; }
