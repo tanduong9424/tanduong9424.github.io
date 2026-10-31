@@ -75,8 +75,8 @@ function updateSession(user) {
   }
 }
 
-function displayName(fileName) {
-  return fileName.replace(/^[0-9a-f-]{36}--/i, '');
+function displayName(fileName, metadata) {
+  return metadata?.originalName || fileName.replace(/^[0-9a-f-]{36}--/i, '');
 }
 
 function formatDate(timestamp) {
@@ -111,20 +111,21 @@ async function loadDocuments() {
     const openButton = document.createElement('button');
     openButton.className = 'document-item';
     openButton.type = 'button';
-    openButton.setAttribute('aria-label', displayName(file.name));
+    const name = displayName(file.name, file.metadata);
+    openButton.setAttribute('aria-label', name);
     const icon = document.createElement('i');
     icon.className = file.name.toLowerCase().endsWith('.pdf')
       ? 'fa-regular fa-file-pdf'
       : 'fa-regular fa-file-lines';
     icon.setAttribute('aria-hidden', 'true');
     const label = document.createElement('span');
-    label.textContent = `${displayName(file.name)}${file.created_at ? ` · ${formatDate(file.created_at)}` : ''}`;
+    label.textContent = `${name}${file.created_at ? ` · ${formatDate(file.created_at)}` : ''}`;
     openButton.append(icon, label);
-    openButton.addEventListener('click', () => previewDocument(path, file.name, openButton));
+    openButton.addEventListener('click', () => previewDocument(path, file.name, name, openButton));
     const removeButton = document.createElement('button');
     removeButton.className = 'documents-button secondary';
     removeButton.type = 'button';
-    removeButton.setAttribute('aria-label', `${document.documentElement.lang === 'vi' ? 'Xóa' : 'Delete'} ${displayName(file.name)}`);
+    removeButton.setAttribute('aria-label', `${document.documentElement.lang === 'vi' ? 'Xóa' : 'Delete'} ${name}`);
     removeButton.innerHTML = '<i class="fa-regular fa-trash-can" aria-hidden="true"></i>';
     removeButton.addEventListener('click', () => deleteDocument(path));
     row.append(openButton, removeButton);
@@ -132,7 +133,7 @@ async function loadDocuments() {
   }
 }
 
-async function previewDocument(path, fileName, selectedButton) {
+async function previewDocument(path, fileName, name, selectedButton) {
   if (!client) return;
   setStatus(document.documentElement.lang === 'vi' ? 'Đang mở tài liệu...' : 'Opening document...');
   const { data, error } = await client.storage.from(STORAGE_BUCKET).download(path);
@@ -146,7 +147,7 @@ async function previewDocument(path, fileName, selectedButton) {
   if (extension === 'pdf') {
     previewUrl = URL.createObjectURL(data);
     const frame = document.createElement('iframe');
-    frame.title = displayName(fileName);
+    frame.title = name;
     frame.src = previewUrl;
     documentPreview.replaceChildren(frame);
   } else if (['md', 'markdown'].includes(extension)) {
@@ -218,12 +219,13 @@ uploadButton.addEventListener('click', async () => {
     return;
   }
   uploadButton.disabled = true;
-  const path = `${currentUser.id}/${crypto.randomUUID()}--${file.name.replace(/[\\/]/g, '_')}`;
+  const path = `${currentUser.id}/${crypto.randomUUID()}.${extension}`;
   const contentType = extension === 'pdf'
     ? 'application/pdf'
     : extension === 'txt' ? 'text/plain' : 'text/markdown';
   const { error } = await client.storage.from(STORAGE_BUCKET).upload(path, file, {
     contentType,
+    metadata: { originalName: file.name },
     upsert: false
   });
   uploadButton.disabled = false;
