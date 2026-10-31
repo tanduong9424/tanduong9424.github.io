@@ -18,6 +18,8 @@ const documentsStatus = document.getElementById('documentsStatus');
 const documentPreview = document.getElementById('documentPreview');
 let currentUser = null;
 let previewUrl = null;
+let pdfLoadingTask = null;
+let pdfPageObserver = null;
 
 function text(key) {
   const messages = {
@@ -29,6 +31,9 @@ function text(key) {
     choose: ['Hãy chọn một tài liệu trước.', 'Choose a file first.'],
     tooLarge: ['Tài liệu vượt quá giới hạn 20 MB.', 'The file exceeds the 20 MB limit.'],
     unsupported: ['Chỉ hỗ trợ PDF, Markdown và TXT.', 'Only PDF, Markdown, and TXT files are supported.'],
+    pdfLibrary: ['Chưa tải được trình đọc PDF. Hãy tải lại trang.', 'The PDF viewer did not load. Reload the page.'],
+    downloadPdf: ['Tải PDF', 'Download PDF'],
+    pdfReady: [count => `PDF · ${count} trang`, count => `PDF · ${count} pages`],
     uploaded: ['Tải tài liệu lên thành công.', 'Document uploaded successfully.'],
     deleted: ['Đã xóa tài liệu.', 'Document deleted.'],
     confirmDelete: ['Bạn có chắc muốn xóa tài liệu này?', 'Are you sure you want to delete this document?'],
@@ -46,6 +51,13 @@ function setStatus(message, isError = false) {
 }
 
 function showEmptyPreview(message) {
+  if (pdfPageObserver) pdfPageObserver.disconnect();
+  pdfPageObserver = null;
+  if (pdfLoadingTask) {
+    const loadingTask = pdfLoadingTask;
+    pdfLoadingTask = null;
+    loadingTask.destroy().catch(error => setStatus(error.message, true));
+  }
   if (previewUrl) URL.revokeObjectURL(previewUrl);
   previewUrl = null;
   const wrapper = document.createElement('div');
@@ -141,15 +153,91 @@ async function previewDocument(path, fileName, name, selectedButton) {
     setStatus(error.message, true);
     return;
   }
+  if (pdfPageObserver) pdfPageObserver.disconnect();
+  pdfPageObserver = null;
+  if (pdfLoadingTask) await pdfLoadingTask.destroy();
+  pdfLoadingTask = null;
   if (previewUrl) URL.revokeObjectURL(previewUrl);
   previewUrl = null;
   const extension = fileName.split('.').pop().toLowerCase();
   if (extension === 'pdf') {
+    if (!window.pdfjsLib) {
+      setStatus(text('pdfLibrary'), true);
+      return;
+    }
     previewUrl = URL.createObjectURL(data);
-    const frame = document.createElement('iframe');
-    frame.title = name;
-    frame.src = previewUrl;
-    documentPreview.replaceChildren(frame);
+    const viewer = document.createElement('div');
+    viewer.className = 'pdf-viewer';
+    const toolbar = document.createElement('div');
+    toolbar.className = 'pdf-toolbar';
+    const title = document.createElement('span');
+    title.className = 'pdf-title';
+    title.textContent = name;
+    const download = document.createElement('a');
+    download.className = 'documents-button secondary pdf-download';
+    download.href = previewUrl;
+    download.download = name;
+    download.textContent = text('downloadPdf');
+    toolbar.append(title, download);
+    const pages = document.createElement('div');
+    pages.className = 'pdf-pages';
+    viewer.append(toolbar, pages);
+    documentPreview.replaceChildren(viewer);
+
+    try {
+      pdfLoadingTask = window.pdfjsLib.getDocument({ data: await data.arrayBuffer() });
+      const pdf = await pdfLoadingTask.promise;
+      const renderPage = async pageElement => {
+        if (pageElement.dataset.rendered === 'true') return;
+        pageElement.dataset.rendered = 'true';
+        const page = await pdf.getPage(Number(pageElement.dataset.pageNumber));
+        const baseViewport = page.getViewport({ scale: 1 });
+        const scale = Math.min(1, (pages.clientWidth - 20) / baseViewport.width);
+        const viewport = page.getViewport({ scale: Math.max(scale, 0.1) });
+        const canvas = pageElement.querySelector('canvas');
+        const outputScale = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(viewport.width * outputScale);
+        canvas.height = Math.floor(viewport.height * outputScale);
+        canvas.style.width = `${Math.floor(viewport.width)}px`;
+        canvas.style.height = `${Math.floor(viewport.height)}px`;
+        await page.render({
+          canvasContext: canvas.getContext('2d'),
+          viewport,
+          transform: outputScale === 1 ? null : [outputScale, 0, 0, outputScale, 0, 0]
+        }).promise;
+      };
+
+      for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+        const pageElement = document.createElement('div');
+        pageElement.className = 'pdf-page';
+        pageElement.dataset.pageNumber = String(pageNumber);
+        const canvas = document.createElement('canvas');
+        canvas.setAttribute('aria-label', `${name} - ${pageNumber}`);
+        pageElement.append(canvas);
+        pages.append(pageElement);
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            observer.unobserve(entry.target);
+            renderPage(entry.target).catch(error => setStatus(error.message, true));
+          }
+        }, { rootMargin: '800px 0px' });
+        pdfPageObserver = observer;
+        pages.querySelectorAll('.pdf-page').forEach(page => observer.observe(page));
+      } else {
+        for (const page of pages.querySelectorAll('.pdf-page')) {
+          await renderPage(page);
+        }
+      }
+      setStatus(text('pdfReady')(pdf.numPages));
+    } catch (error) {
+      showEmptyPreview(text('previewError'));
+      setStatus(error.message, true);
+      return;
+    }
   } else if (['md', 'markdown'].includes(extension)) {
     const content = document.createElement('article');
     content.className = 'document-markdown';
