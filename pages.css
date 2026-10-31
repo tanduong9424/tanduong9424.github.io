@@ -219,8 +219,10 @@ footer b { color: var(--text); font-size: 13px; }
 .document-markdown h1, .document-markdown h2, .document-markdown h3 { margin: 1.2em 0 .5em; }
 .document-markdown p, .document-markdown ul, .document-markdown ol, .document-markdown blockquote { margin: .7em 0; }
 .document-markdown pre { overflow-x: auto; padding: 12px; border-radius: 8px; background: var(--chip); }
-.document-markdown table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
-.document-markdown th, .document-markdown td { padding: 7px; border: 1px solid var(--line); text-align: left; }
+.markdown-table-scroll { max-width: 100%; margin: 12px 0; overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+.markdown-table-scroll:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.document-markdown table { width: max-content; min-width: 100%; border-collapse: collapse; table-layout: auto; }
+.document-markdown th, .document-markdown td { min-width: 5ch; padding: 7px 9px; border: 1px solid var(--line); text-align: left; vertical-align: middle; white-space: normal; word-break: normal; overflow-wrap: normal; }
 .document-empty { display: grid; min-height: 420px; place-items: center; padding: 24px; color: var(--muted); text-align: center; }
 .document-empty i { display: block; margin-bottom: 10px; color: var(--accent); font-size: 28px; }
 .document-preview iframe { min-width: 0; }
@@ -263,7 +265,8 @@ footer b { color: var(--text); font-size: 13px; }
   .documents-page .pdf-fit-button { min-height: 40px; }
   .documents-page .pdf-download { min-height: 38px; padding: 7px 9px; font-size: 11px; }
   .documents-page .pdf-pages { gap: 8px; padding: 8px 4px; }
-  .documents-page .document-markdown { padding: 14px; }
+  .documents-page .document-markdown { padding: 14px; font-size: 13px; }
+  .documents-page .document-markdown th, .documents-page .document-markdown td { padding: 6px 8px; font-size: 12px; line-height: 1.4; }
   .wrap { padding: 0 20px; }
   .nav { flex-wrap: wrap; gap: 10px; padding: 12px 14px; }
   .nav-r { gap: 10px; }

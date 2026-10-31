@@ -325,6 +325,18 @@ async function previewDocument(path, fileName, name, selectedButton) {
     content.innerHTML = DOMPurify.sanitize(marked.parse(await data.text()), {
       FORBID_TAGS: ['img', 'iframe', 'video', 'audio']
     });
+    content.querySelectorAll('table').forEach(table => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'markdown-table-scroll';
+      wrapper.tabIndex = 0;
+      wrapper.setAttribute('role', 'region');
+      wrapper.setAttribute(
+        'aria-label',
+        document.documentElement.lang === 'vi' ? 'Bảng, cuộn ngang để xem đầy đủ' : 'Table, scroll horizontally to view all columns'
+      );
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.append(table);
+    });
     documentPreview.replaceChildren(content);
   } else if (extension === 'txt') {
     const content = document.createElement('pre');
