@@ -20,6 +20,9 @@ let currentUser = null;
 let previewUrl = null;
 let pdfLoadingTask = null;
 let pdfPageObserver = null;
+let pdfZoom = 1;
+let pdfRenderVersion = 0;
+const pdfRenderTasks = new WeakMap();
 
 function text(key) {
   const messages = {
@@ -33,6 +36,9 @@ function text(key) {
     unsupported: ['Chỉ hỗ trợ PDF, Markdown và TXT.', 'Only PDF, Markdown, and TXT files are supported.'],
     pdfLibrary: ['Chưa tải được trình đọc PDF. Hãy tải lại trang.', 'The PDF viewer did not load. Reload the page.'],
     downloadPdf: ['Tải PDF', 'Download PDF'],
+    zoomOut: ['Thu nhỏ PDF', 'Zoom out PDF'],
+    zoomIn: ['Phóng to PDF', 'Zoom in PDF'],
+    fitWidth: ['Vừa chiều ngang', 'Fit to width'],
     pdfReady: [count => `PDF · ${count} trang`, count => `PDF · ${count} pages`],
     uploaded: ['Tải tài liệu lên thành công.', 'Document uploaded successfully.'],
     deleted: ['Đã xóa tài liệu.', 'Document deleted.'],
@@ -53,6 +59,7 @@ function setStatus(message, isError = false) {
 function showEmptyPreview(message) {
   if (pdfPageObserver) pdfPageObserver.disconnect();
   pdfPageObserver = null;
+  pdfRenderVersion += 1;
   if (pdfLoadingTask) {
     const loadingTask = pdfLoadingTask;
     pdfLoadingTask = null;
@@ -178,7 +185,26 @@ async function previewDocument(path, fileName, name, selectedButton) {
     download.href = previewUrl;
     download.download = name;
     download.textContent = text('downloadPdf');
-    toolbar.append(title, download);
+    const zoomControls = document.createElement('div');
+    zoomControls.className = 'pdf-zoom-controls';
+    const zoomOut = document.createElement('button');
+    zoomOut.className = 'documents-button secondary pdf-zoom-button';
+    zoomOut.type = 'button';
+    zoomOut.setAttribute('aria-label', text('zoomOut'));
+    zoomOut.textContent = '−';
+    const zoomLabel = document.createElement('span');
+    zoomLabel.className = 'pdf-zoom-label';
+    const zoomIn = document.createElement('button');
+    zoomIn.className = 'documents-button secondary pdf-zoom-button';
+    zoomIn.type = 'button';
+    zoomIn.setAttribute('aria-label', text('zoomIn'));
+    zoomIn.textContent = '+';
+    const fitWidth = document.createElement('button');
+    fitWidth.className = 'documents-button secondary pdf-fit-button';
+    fitWidth.type = 'button';
+    fitWidth.textContent = text('fitWidth');
+    zoomControls.append(zoomOut, zoomLabel, zoomIn, fitWidth);
+    toolbar.append(title, zoomControls, download);
     const pages = document.createElement('div');
     pages.className = 'pdf-pages';
     viewer.append(toolbar, pages);
@@ -187,24 +213,81 @@ async function previewDocument(path, fileName, name, selectedButton) {
     try {
       pdfLoadingTask = window.pdfjsLib.getDocument({ data: await data.arrayBuffer() });
       const pdf = await pdfLoadingTask.promise;
-      const renderPage = async pageElement => {
-        if (pageElement.dataset.rendered === 'true') return;
-        pageElement.dataset.rendered = 'true';
+      pdfZoom = 1;
+      const zoomText = () => `${Math.round(pdfZoom * 100)}%`;
+      const renderPage = async (pageElement, version = pdfRenderVersion) => {
+        if (pageElement.dataset.rendered === 'true' || pageElement.dataset.rendering === 'true') return;
+        pageElement.dataset.rendering = 'true';
         const page = await pdf.getPage(Number(pageElement.dataset.pageNumber));
+        if (version !== pdfRenderVersion) return;
         const baseViewport = page.getViewport({ scale: 1 });
-        const scale = Math.min(1, (pages.clientWidth - 20) / baseViewport.width);
+        const fitScale = (pages.clientWidth - 20) / baseViewport.width;
+        const scale = fitScale * pdfZoom;
         const viewport = page.getViewport({ scale: Math.max(scale, 0.1) });
         const canvas = pageElement.querySelector('canvas');
-        const outputScale = Math.min(window.devicePixelRatio || 1, 2);
+        const pixelRatio = window.devicePixelRatio || 1;
+        const outputScale = Math.min(
+          pixelRatio,
+          3,
+          4096 / viewport.width,
+          4096 / viewport.height,
+          Math.sqrt(16000000 / (viewport.width * viewport.height))
+        );
         canvas.width = Math.floor(viewport.width * outputScale);
         canvas.height = Math.floor(viewport.height * outputScale);
         canvas.style.width = `${Math.floor(viewport.width)}px`;
         canvas.style.height = `${Math.floor(viewport.height)}px`;
-        await page.render({
+        const renderTask = page.render({
           canvasContext: canvas.getContext('2d'),
           viewport,
           transform: outputScale === 1 ? null : [outputScale, 0, 0, outputScale, 0, 0]
-        }).promise;
+        });
+        pdfRenderTasks.set(pageElement, renderTask);
+        try {
+          await renderTask.promise;
+          if (version === pdfRenderVersion && pageElement.querySelector('canvas') === canvas) {
+            pageElement.dataset.rendered = 'true';
+          }
+        } finally {
+          if (pdfRenderTasks.get(pageElement) === renderTask) pdfRenderTasks.delete(pageElement);
+          if (version === pdfRenderVersion) delete pageElement.dataset.rendering;
+        }
+      };
+      const queueVisiblePages = () => {
+        if (pdfPageObserver) pdfPageObserver.disconnect();
+        pdfPageObserver = null;
+        pdfRenderVersion += 1;
+        const version = pdfRenderVersion;
+        pages.querySelectorAll('.pdf-page').forEach(pageElement => {
+          const task = pdfRenderTasks.get(pageElement);
+          if (task) task.cancel();
+          delete pageElement.dataset.rendered;
+          delete pageElement.dataset.rendering;
+          const oldCanvas = pageElement.querySelector('canvas');
+          const canvas = document.createElement('canvas');
+          canvas.setAttribute('aria-label', `${name} - ${pageElement.dataset.pageNumber}`);
+          oldCanvas.replaceWith(canvas);
+        });
+        zoomLabel.textContent = zoomText();
+        pages.style.alignItems = pdfZoom > 1 ? 'flex-start' : 'center';
+
+        if ('IntersectionObserver' in window) {
+          const versionObserver = new IntersectionObserver(entries => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              versionObserver.unobserve(entry.target);
+              renderPage(entry.target, version).catch(error => {
+                if (error.name !== 'RenderingCancelledException') setStatus(error.message, true);
+              });
+            }
+          }, { rootMargin: '800px 0px' });
+          pdfPageObserver = versionObserver;
+          pages.querySelectorAll('.pdf-page').forEach(pageElement => versionObserver.observe(pageElement));
+        } else {
+          pages.querySelectorAll('.pdf-page').forEach(pageElement => {
+            renderPage(pageElement, version).catch(error => setStatus(error.message, true));
+          });
+        }
       };
 
       for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
@@ -216,22 +299,20 @@ async function previewDocument(path, fileName, name, selectedButton) {
         pageElement.append(canvas);
         pages.append(pageElement);
       }
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver(entries => {
-          for (const entry of entries) {
-            if (!entry.isIntersecting) continue;
-            observer.unobserve(entry.target);
-            renderPage(entry.target).catch(error => setStatus(error.message, true));
-          }
-        }, { rootMargin: '800px 0px' });
-        pdfPageObserver = observer;
-        pages.querySelectorAll('.pdf-page').forEach(page => observer.observe(page));
-      } else {
-        for (const page of pages.querySelectorAll('.pdf-page')) {
-          await renderPage(page);
-        }
-      }
+      zoomOut.addEventListener('click', () => {
+        pdfZoom = Math.max(0.75, Math.round((pdfZoom - 0.25) * 100) / 100);
+        queueVisiblePages();
+      });
+      zoomIn.addEventListener('click', () => {
+        pdfZoom = Math.min(2.5, Math.round((pdfZoom + 0.25) * 100) / 100);
+        queueVisiblePages();
+      });
+      fitWidth.addEventListener('click', () => {
+        pdfZoom = 1;
+        pages.scrollLeft = 0;
+        queueVisiblePages();
+      });
+      queueVisiblePages();
       setStatus(text('pdfReady')(pdf.numPages));
     } catch (error) {
       showEmptyPreview(text('previewError'));
