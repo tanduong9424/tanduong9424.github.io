@@ -16,6 +16,7 @@ const signedInActions = document.getElementById('signedInActions');
 const documentsList = document.getElementById('documentsList');
 const documentsStatus = document.getElementById('documentsStatus');
 const documentPreview = document.getElementById('documentPreview');
+const readerExit = document.getElementById('readerExit');
 let currentUser = null;
 let previewUrl = null;
 let pdfLoadingTask = null;
@@ -57,6 +58,7 @@ function setStatus(message, isError = false) {
 }
 
 function showEmptyPreview(message) {
+  document.body.classList.remove('is-reading');
   if (pdfPageObserver) pdfPageObserver.disconnect();
   pdfPageObserver = null;
   pdfRenderVersion += 1;
@@ -349,8 +351,13 @@ async function previewDocument(path, fileName, name, selectedButton) {
   }
   documentsList.querySelectorAll('.document-item').forEach(button => button.removeAttribute('aria-current'));
   selectedButton.setAttribute('aria-current', 'true');
+  document.body.classList.add('is-reading');
   setStatus('');
 }
+
+readerExit.addEventListener('click', () => {
+  document.body.classList.remove('is-reading');
+});
 
 async function deleteDocument(path) {
   if (!client || !currentUser || !window.confirm(text('confirmDelete'))) return;
