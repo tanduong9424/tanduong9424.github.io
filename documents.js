@@ -1,5 +1,5 @@
-const SUPABASE_URL = '';
-const SUPABASE_ANON_KEY = '';
+const SUPABASE_URL = 'https://eachoezeqyxbmeciivsw.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_q3xK8NDSsBs7tJeDhdMApQ_hwsN3CkA';
 const STORAGE_BUCKET = 'private-documents';
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 const allowedExtensions = new Set(['pdf', 'md', 'markdown', 'txt']);
