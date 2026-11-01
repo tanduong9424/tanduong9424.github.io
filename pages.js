@@ -44,3 +44,12 @@ document.getElementById('year').textContent = new Date().toLocaleDateString(
   document.documentElement.lang === 'vi' ? 'vi-VN' : 'en-US',
   { month: 'short', day: 'numeric', year: 'numeric' }
 );
+
+document.querySelectorAll('.education-page .toeic-certificate img').forEach(image => {
+  const certificate = image.closest('.toeic-certificate');
+  if (!certificate) return;
+
+  image.addEventListener('load', () => certificate.classList.add('has-image'), { once: true });
+  image.addEventListener('error', () => certificate.classList.remove('has-image'), { once: true });
+  if (image.complete && image.naturalWidth > 0) certificate.classList.add('has-image');
+});

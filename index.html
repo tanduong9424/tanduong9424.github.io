@@ -89,9 +89,39 @@ h2[data-i="hObj"]:before,h2[data-i="hEdu"]:before,h2[data-i="hSkills"]:before,h2
 .p{padding:16px;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;background:var(--bg);box-shadow:0 6px 18px rgba(70,48,20,.04)}
 .p h3{font-size:14.5px;font-weight:600}
 .p h3:before{content:"\f542";margin-right:7px;color:var(--accent);font:900 .9em "Font Awesome 6 Free"}
-.edu-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.edu-thumbs img{display:block;width:100%;height:82px;object-fit:cover;border:1px solid var(--line);border-radius:8px}
-.edu-thumbs img:first-child{object-position:center 52%}
+.toeic-section{position:relative;overflow:hidden;margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(135deg,var(--surface),var(--bg))}
+.gpa{display:inline-flex;align-items:center;gap:10px;margin-top:8px;padding:9px 12px;border:1px solid color-mix(in srgb,var(--accent) 25%,var(--line));border-radius:11px;background:linear-gradient(120deg,color-mix(in srgb,var(--accent) 11%,var(--surface)),var(--surface) 72%);box-shadow:0 6px 16px rgba(48,40,28,.06);color:var(--text)}
+.gpa-icon{display:grid;width:34px;height:34px;flex:0 0 34px;place-items:center;border:1px solid color-mix(in srgb,var(--accent) 28%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));color:var(--accent);font-size:14px}
+.gpa-copy{display:flex;flex-direction:column;gap:1px}
+.gpa-label{color:var(--muted);font-size:7px;font-weight:700;letter-spacing:.1em}
+.gpa-copy strong{color:var(--accent);font-size:16px;line-height:1.15;letter-spacing:-.04em}
+.gpa-copy small{color:var(--muted);font-size:9px;font-weight:600;letter-spacing:0}
+.gpa-secondary{margin-left:7px;padding-left:7px;border-left:1px solid var(--line);color:var(--text);font-size:12px;letter-spacing:-.02em}
+.toeic-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.toeic-kicker{color:var(--accent2);font-size:9px;font-weight:700;letter-spacing:.14em}
+.toeic-heading h3{margin:3px 0 0;font-size:14px}
+.toeic-heading>i{display:grid;width:34px;height:34px;place-items:center;border:1px solid var(--line);border-radius:10px;background:var(--chip);color:var(--accent)}
+.toeic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.toeic-certificate{--toeic-accent:var(--accent);display:grid;grid-template-columns:minmax(0,1fr);overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:0 8px 20px rgba(48,40,28,.06);transition:transform .2s ease,box-shadow .2s ease}
+.toeic-certificate:hover{transform:translateY(-2px);box-shadow:0 13px 26px rgba(48,40,28,.11)}
+.toeic-sw{--toeic-accent:var(--accent2)}
+.toeic-details{display:flex;min-width:0;flex-direction:column;justify-content:center;padding:10px 12px}
+.toeic-type{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:10px;font-weight:600}
+.toeic-type i{color:var(--toeic-accent)}
+.toeic-score{display:flex;align-items:baseline;gap:5px;margin-top:4px;color:var(--toeic-accent)}
+.toeic-score strong{font-size:30px;line-height:1.1;letter-spacing:-.06em}
+.toeic-score span{color:var(--muted);font-size:11px;font-weight:600}
+.toeic-meter{height:4px;margin-top:7px;overflow:hidden;border-radius:99px;background:var(--chip)}
+.toeic-meter span{display:block;width:var(--toeic-progress);height:100%;border-radius:inherit;background:var(--toeic-accent)}
+.toeic-note{margin-top:4px;color:var(--muted);font-size:9px}
+.image-lightbox:not([open]){display:none}
+.image-lightbox[open]{position:fixed;inset:0;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);width:100vw;height:100vh;height:100dvh;min-height:0;max-width:none;max-height:none;margin:0;padding:48px;place-items:center;overflow:hidden;border:0;background:rgba(15,16,15,.96);color:#fff}
+.image-lightbox::backdrop{background:rgba(15,16,15,.96)}
+.image-lightbox img{display:block;width:auto;height:auto;min-width:0;min-height:0;max-width:calc(100vw - 96px);max-height:calc(100vh - 96px);max-height:calc(100dvh - 96px);object-fit:contain}
+.image-lightbox-close{position:absolute;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));display:grid;width:44px;height:44px;place-items:center;border:1px solid rgba(255,255,255,.32);border-radius:50%;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:18px}
+.image-lightbox-close:hover,.image-lightbox-close:focus-visible{background:rgba(255,255,255,.24)}
+img[data-fullscreen-image]{cursor:zoom-in}
+img[data-fullscreen-image]:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
 .p .desc{color:var(--muted);font-size:12.5px;line-height:1.5;margin-top:3px}
 .p .tech{color:var(--muted);font-weight:600;font-size:12px;margin-top:4px}
 .project-image{aspect-ratio:16/9;border-radius:8px;overflow:hidden;background:var(--chip);margin-top:auto;flex:0 0 auto}
@@ -121,6 +151,9 @@ footer a{color:var(--accent);font-weight:600}
   .edu-top .d{margin-right:0}
   .experience-entry-top{flex-direction:column;gap:6px}
   .experience-gallery{grid-template-columns:1fr;gap:10px}
+  .toeic-grid{grid-template-columns:1fr}
+  .image-lightbox[open]{padding:64px 12px 12px}
+  .image-lightbox img{max-width:calc(100vw - 24px);max-height:calc(100vh - 76px);max-height:calc(100dvh - 76px)}
   footer{flex-direction:column;gap:6px}
 }
 </style>
@@ -131,14 +164,14 @@ footer a{color:var(--accent);font-weight:600}
   <nav class="nav">
     <a href="#top" class="brand">HTD · Portfolio</a>
     <div class="nav-r">
-      <a class="l" href="#objective"><i class="fa-solid fa-house" aria-hidden="true"></i><span data-i="nObj">Objective</span></a>
-      <a class="l" href="education.html"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span data-i="nEdu">Education</span></a>
-      <a class="l" href="skills.html"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><span data-i="nSkills">Skills</span></a>
-      <a class="l" href="projects.html"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i><span data-i="nProj">Projects</span></a>
+      <a class="l" href="#objective"><i class="fa-solid fa-house" aria-hidden="true"></i><span data-i="nObj">Mục tiêu</span></a>
+      <a class="l" href="education.html"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><span data-i="nEdu">Học vấn</span></a>
+      <a class="l" href="skills.html"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><span data-i="nSkills">Kỹ năng</span></a>
+      <a class="l" href="projects.html"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i><span data-i="nProj">Dự án</span></a>
       <a class="l" href="documents.html"><i class="fa-solid fa-folder-open" aria-hidden="true"></i><span data-i="nDocs">Tài liệu</span></a>
-      <a class="l" href="contact.html"><i class="fa-regular fa-address-card" aria-hidden="true"></i><span data-i="nContact">Contact</span></a>
+      <a class="l" href="contact.html"><i class="fa-regular fa-address-card" aria-hidden="true"></i><span data-i="nContact">Liên hệ</span></a>
       <button class="pill" id="langBtn"><i class="fa-solid fa-language" aria-hidden="true"></i>VI / EN</button>
-      <button class="pill" id="themeBtn"><i class="fa-regular fa-moon" aria-hidden="true"></i>Theme</button>
+      <button class="pill" id="themeBtn"><i class="fa-regular fa-moon" aria-hidden="true"></i><span data-i="themeLabel">Giao diện</span></button>
     </div>
   </nav>
 
@@ -175,11 +208,40 @@ footer a{color:var(--accent);font-weight:600}
         </div>
         <span class="d">09/2022 – <span data-i="present">Present</span></span>
       </div>
-      <p>GPA 3.42 / 4.0 · 8.48 / 10</p>
-      <div class="edu-thumbs" aria-label="Saigon University campus">
-        <img src="img/sgu.jpg" alt="Tòa nhà chính Đại học Sài Gòn" loading="lazy">
-        <img src="img/sanSGU.webp" alt="Khuôn viên Đại học Sài Gòn" loading="lazy">
+      <div class="gpa" aria-label="GPA 3.42 out of 4.0, equivalent to 8.48 out of 10">
+        <span class="gpa-icon"><i class="fa-solid fa-award" aria-hidden="true"></i></span>
+        <span class="gpa-copy">
+          <span class="gpa-label" data-i="gpaLabel">ĐIỂM TRUNG BÌNH TÍCH LŨY</span>
+          <strong>3.42 <small>/ 4.0</small><span class="gpa-secondary">8.48 <small>/ 10</small></span></strong>
+        </span>
       </div>
+      <section class="toeic-section" aria-labelledby="toeic-home-title">
+        <div class="toeic-heading">
+          <div>
+            <span class="toeic-kicker" data-i="toeicKicker">CHỨNG CHỈ · NGOẠI NGỮ</span>
+            <h3 id="toeic-home-title" data-i="toeicTitle">Kết quả TOEIC</h3>
+          </div>
+          <i class="fa-solid fa-award" aria-hidden="true"></i>
+        </div>
+        <div class="toeic-grid">
+          <article class="toeic-certificate toeic-lr" style="--toeic-progress:73.2%">
+            <div class="toeic-details">
+              <div class="toeic-type"><i class="fa-solid fa-headphones" aria-hidden="true"></i><span data-i="toeicLR">Nghe & Đọc</span></div>
+              <div class="toeic-score"><strong>725</strong><span>/ 990</span></div>
+              <div class="toeic-meter" aria-hidden="true"><span></span></div>
+              <div class="toeic-note" data-i="toeicLRMax">Điểm tối đa: 990</div>
+            </div>
+          </article>
+          <article class="toeic-certificate toeic-sw" style="--toeic-progress:70%">
+            <div class="toeic-details">
+              <div class="toeic-type"><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i><span data-i="toeicSW">Nói & Viết</span></div>
+              <div class="toeic-score"><strong>280</strong><span>/ 400</span></div>
+              <div class="toeic-meter" aria-hidden="true"><span></span></div>
+              <div class="toeic-note" data-i="toeicSWMax">Điểm tối đa: 400</div>
+            </div>
+          </article>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -195,19 +257,19 @@ footer a{color:var(--accent);font-weight:600}
     <p class="experience-description" data-i="experienceDetails">Hỗ trợ khách hàng và troubleshooting các vấn đề liên quan đến CDN, email server, email gateway, WAF, VPS và SSL.</p>
     <div class="experience-gallery" role="group" aria-label="Hình ảnh tại VNetwork">
       <figure class="experience-photo">
-        <img src="img/vnet1.jpg" alt="Trung tâm vận hành an ninh mạng VNetwork" loading="lazy">
+        <img src="img/vnet1.jpg" alt="Trung tâm vận hành an ninh mạng VNetwork" data-fullscreen-image loading="lazy">
         <figcaption><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span data-i="experiencePhotoSoc">Trung tâm vận hành an ninh mạng</span></figcaption>
       </figure>
       <figure class="experience-photo">
-        <img src="img/vnet2.jpg" alt="Kỹ thuật viên kiểm tra máy chủ tại VNetwork" loading="lazy">
+        <img src="img/vnet2.jpg" alt="Kỹ thuật viên kiểm tra máy chủ tại VNetwork" data-fullscreen-image loading="lazy">
         <figcaption><i class="fa-solid fa-server" aria-hidden="true"></i><span data-i="experiencePhotoServer">Vận hành máy chủ</span></figcaption>
       </figure>
       <figure class="experience-photo">
-        <img src="img/tbd1.png" alt="Nhân viên VNetwork tham gia hoạt động team building" loading="lazy">
+        <img src="img/tbd1.png" alt="Nhân viên VNetwork tham gia hoạt động team building" data-fullscreen-image loading="lazy">
         <figcaption><i class="fa-solid fa-people-group" aria-hidden="true"></i><span data-i="experiencePhotoTeamActivity">Hoạt động team building</span></figcaption>
       </figure>
       <figure class="experience-photo">
-        <img src="img/tbd2.JPG" alt="Đồng nghiệp VNetwork chụp ảnh trong chuyến team building trên biển" loading="lazy">
+        <img src="img/tbd2.JPG" alt="Đồng nghiệp VNetwork chụp ảnh trong chuyến team building trên biển" data-fullscreen-image loading="lazy">
         <figcaption><i class="fa-solid fa-people-group" aria-hidden="true"></i><span data-i="experiencePhotoTeamBeach">Đồng đội bên bờ biển</span></figcaption>
       </figure>
     </div>
@@ -321,6 +383,7 @@ footer a{color:var(--accent);font-weight:600}
 <script>
 const EN = {
   nObj:'Objective', nEdu:'Education', nSkills:'Skills', nProj:'Projects', nDocs:'Documents', nContact:'Contact',
+  themeLabel:'Theme',
   role:'Target roles: Network/NOC · Systems Administration',
   tagline:'Final-year Computer Engineering student focused on network infrastructure: routing, switching, VPNs, firewalls and monitoring, with hands-on Linux/Windows Server administration.',
   emailMe:'Email me', city:'Ho Chi Minh City', city2:'Ho Chi Minh City',
@@ -328,6 +391,14 @@ const EN = {
   objText:'Seeking <strong>Network/NOC Intern</strong> roles first, followed by <strong>System Administration Intern</strong> roles. Ready to apply TCP/IP, routing and switching, VLAN, DNS, VPN and firewall fundamentals to network operations, monitoring and troubleshooting while growing Linux/Windows Server administration skills.',
   hEdu:'Education', uni:'Saigon University',
   degree:'Bachelor of Information Technology - Major in Computer Engineering',
+  gpaLabel:'CUMULATIVE GPA',
+  toeicKicker:'CREDENTIALS · ENGLISH',
+  toeicTitle:'TOEIC results',
+  toeicImagePlaceholder:'CERTIFICATE PHOTO',
+  toeicLR:'Listening & Reading',
+  toeicLRMax:'Maximum score: 990',
+  toeicSW:'Speaking & Writing',
+  toeicSWMax:'Maximum score: 400',
   present:'Present', hExperience:'Work Experience',
   experienceRole:'IT System Support Intern',
   experienceDates:'Jun 2026 – Oct 2026 · 5 months',
@@ -382,6 +453,8 @@ document.getElementById('themeBtn').onclick = () => {
   try{ localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light'); }catch(e){}
 };
 document.getElementById('year').textContent = new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-</script>
+
+  </script>
+  <script src="image-viewer.js"></script>
 </body>
 </html>

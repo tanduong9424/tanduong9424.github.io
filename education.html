@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="pages.css">
 </head>
-<body>
+<body class="education-page">
   <div class="wrap">
     <nav class="nav">
       <a href="index.html#top" class="brand"><i class="fa-solid fa-network-wired" aria-hidden="true"></i>HTD · Portfolio</a>
@@ -33,11 +33,11 @@
       <article class="card education-card">
         <div class="education-gallery" aria-label="Saigon University campus">
           <figure class="education-photo">
-            <img src="img/sgu.jpg" alt="Tòa nhà chính Đại học Sài Gòn" loading="lazy">
+            <img src="img/sgu.jpg" alt="Tòa nhà chính Đại học Sài Gòn" data-fullscreen-image loading="lazy">
             <figcaption><i class="fa-solid fa-landmark" aria-hidden="true"></i> <span data-vi="Đại học Sài Gòn" data-en="Saigon University">Đại học Sài Gòn</span></figcaption>
           </figure>
           <figure class="education-photo">
-            <img src="img/sanSGU.webp" alt="Khuôn viên Đại học Sài Gòn" loading="lazy">
+            <img src="img/sanSGU.webp" alt="Khuôn viên Đại học Sài Gòn" data-fullscreen-image loading="lazy">
             <figcaption><i class="fa-solid fa-tree" aria-hidden="true"></i> <span data-vi="Khuôn viên trường" data-en="Campus grounds">Khuôn viên trường</span></figcaption>
           </figure>
         </div>
@@ -49,7 +49,58 @@
           </div>
           <span class="date"><i class="fa-solid fa-user-graduate" aria-hidden="true"></i> <span data-vi="Sinh viên năm cuối" data-en="Final-year student">Sinh viên năm cuối</span></span>
         </div>
-        <div class="gpa"><i class="fa-solid fa-award" aria-hidden="true"></i>&nbsp; GPA&nbsp; 3.42 / 4.0&nbsp; · &nbsp;8.48 / 10</div>
+        <div class="gpa" aria-label="GPA 3.42 out of 4.0, equivalent to 8.48 out of 10">
+          <span class="gpa-icon"><i class="fa-solid fa-award" aria-hidden="true"></i></span>
+          <span class="gpa-copy">
+            <span class="gpa-label" data-vi="ĐIỂM TRUNG BÌNH TÍCH LŨY" data-en="CUMULATIVE GPA">ĐIỂM TRUNG BÌNH TÍCH LŨY</span>
+            <strong>3.42 <small>/ 4.0</small><span class="gpa-secondary">8.48 <small>/ 10</small></span></strong>
+          </span>
+        </div>
+        <section class="toeic-section" aria-labelledby="toeic-title">
+          <div class="toeic-heading">
+            <div>
+              <span class="toeic-kicker" data-vi="CHỨNG CHỈ · NGOẠI NGỮ" data-en="CREDENTIALS · ENGLISH">CHỨNG CHỈ · NGOẠI NGỮ</span>
+              <h3 id="toeic-title" data-vi="Kết quả TOEIC" data-en="TOEIC results">Kết quả TOEIC</h3>
+            </div>
+            <i class="fa-solid fa-award" aria-hidden="true"></i>
+          </div>
+          <div class="toeic-grid">
+            <article class="toeic-certificate toeic-lr" style="--toeic-progress:73.2%">
+              <div class="toeic-photo">
+                <img src="img/lr.jpg" alt="Chứng chỉ TOEIC Listening and Reading" data-fullscreen-image loading="lazy" decoding="async">
+                <div class="toeic-image-placeholder" aria-hidden="true">
+                  <i class="fa-solid fa-headphones"></i>
+                  <span data-vi="ẢNH CHỨNG CHỈ" data-en="CERTIFICATE PHOTO">ẢNH CHỨNG CHỈ</span>
+                  <strong>Listening &amp; Reading</strong>
+                </div>
+                <span class="toeic-image-tag">TOEIC · L&amp;R</span>
+              </div>
+              <div class="toeic-details">
+                <div class="toeic-type"><i class="fa-solid fa-headphones" aria-hidden="true"></i><span data-vi="Nghe & Đọc" data-en="Listening & Reading">Nghe & Đọc</span></div>
+                <div class="toeic-score"><strong>725</strong><span>/ 990</span></div>
+                <div class="toeic-meter" aria-hidden="true"><span></span></div>
+                <div class="toeic-note" data-vi="Điểm tối đa: 990" data-en="Maximum score: 990">Điểm tối đa: 990</div>
+              </div>
+            </article>
+            <article class="toeic-certificate toeic-sw" style="--toeic-progress:70%">
+              <div class="toeic-photo">
+                <img src="img/sw.jpg" alt="Chứng chỉ TOEIC Speaking and Writing" data-fullscreen-image loading="lazy" decoding="async">
+                <div class="toeic-image-placeholder" aria-hidden="true">
+                  <i class="fa-solid fa-microphone-lines"></i>
+                  <span data-vi="ẢNH CHỨNG CHỈ" data-en="CERTIFICATE PHOTO">ẢNH CHỨNG CHỈ</span>
+                  <strong>Speaking &amp; Writing</strong>
+                </div>
+                <span class="toeic-image-tag">TOEIC · S&amp;W</span>
+              </div>
+              <div class="toeic-details">
+                <div class="toeic-type"><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i><span data-vi="Nói & Viết" data-en="Speaking & Writing">Nói & Viết</span></div>
+                <div class="toeic-score"><strong>280</strong><span>/ 400</span></div>
+                <div class="toeic-meter" aria-hidden="true"><span></span></div>
+                <div class="toeic-note" data-vi="Điểm tối đa: 400" data-en="Maximum score: 400">Điểm tối đa: 400</div>
+              </div>
+            </article>
+          </div>
+        </section>
         <p><i class="education-info-icon fa-solid fa-network-wired" aria-hidden="true"></i><span data-vi="Định hướng chuyên môn: hạ tầng mạng, routing & switching, vận hành Network/NOC; tiếp đến là quản trị hệ thống máy chủ." data-en="Areas of focus: network infrastructure, routing and switching, Network/NOC operations, followed by server administration.">Định hướng chuyên môn: hạ tầng mạng, routing & switching, vận hành Network/NOC; tiếp đến là quản trị hệ thống máy chủ.</span></p>
         <div class="education-meta">
           <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> TP. Hồ Chí Minh</span>
@@ -60,5 +111,6 @@
     <footer><div><b><i class="fa-solid fa-network-wired" aria-hidden="true"></i>HTD · Portfolio</b> · <span data-vi="Học vấn" data-en="Education">Học vấn</span></div><div id="year"></div></footer>
   </div>
   <script src="pages.js"></script>
+  <script src="image-viewer.js"></script>
 </body>
 </html>
