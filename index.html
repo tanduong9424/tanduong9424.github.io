@@ -157,7 +157,7 @@ footer a{color:var(--accent);font-weight:600}
     <div class="hero-r">
       <!-- Đặt ảnh chân dung vào img/avatar.jpg -->
       <img class="photo" src="img/avatar.jpg" alt="Huỳnh Tấn Dương" onerror="this.style.visibility='hidden'">
-      <div class="caption"><span>Huỳnh Tấn Dương — </span><span data-i="city2">TP. Hồ Chí Minh</span></div>
+      <div class="caption"><span>Huỳnh Tấn Dương - </span><span data-i="city2">TP. Hồ Chí Minh</span></div>
     </div>
   </header>
 
@@ -171,7 +171,7 @@ footer a{color:var(--accent);font-weight:600}
       <div class="edu-top">
         <div>
           <div class="sub" style="margin-top:6px" data-i="uni">Đại học Sài Gòn (Saigon University)</div>
-          <p style="margin-top:2px" data-i="degree">Kỹ sư Công nghệ Thông tin — chuyên ngành Kỹ thuật Máy tính</p>
+          <p style="margin-top:2px" data-i="degree">Kỹ sư Công nghệ Thông tin - chuyên ngành Kỹ thuật Máy tính</p>
         </div>
         <span class="d">09/2022 – <span data-i="present">Present</span></span>
       </div>
@@ -190,7 +190,7 @@ footer a{color:var(--accent);font-weight:600}
         <h3 data-i="experienceRole">Thực tập sinh IT System Support</h3>
         <p class="experience-company">VNetwork</p>
       </div>
-      <span class="experience-date"><i class="fa-regular fa-calendar" aria-hidden="true"></i><span data-i="experienceDates">05/2026 – 10/2026 · 6 tháng</span></span>
+      <span class="experience-date"><i class="fa-regular fa-calendar" aria-hidden="true"></i><span data-i="experienceDates">06/2026 – 10/2026 · 5 tháng</span></span>
     </div>
     <p class="experience-description" data-i="experienceDetails">Hỗ trợ khách hàng và troubleshooting các vấn đề liên quan đến CDN, email server, email gateway, WAF, VPS và SSL.</p>
     <div class="experience-gallery" role="group" aria-label="Hình ảnh tại VNetwork">
@@ -201,6 +201,14 @@ footer a{color:var(--accent);font-weight:600}
       <figure class="experience-photo">
         <img src="img/vnet2.jpg" alt="Kỹ thuật viên kiểm tra máy chủ tại VNetwork" loading="lazy">
         <figcaption><i class="fa-solid fa-server" aria-hidden="true"></i><span data-i="experiencePhotoServer">Vận hành máy chủ</span></figcaption>
+      </figure>
+      <figure class="experience-photo">
+        <img src="img/tbd1.png" alt="Nhân viên VNetwork tham gia hoạt động team building" loading="lazy">
+        <figcaption><i class="fa-solid fa-people-group" aria-hidden="true"></i><span data-i="experiencePhotoTeamActivity">Hoạt động team building</span></figcaption>
+      </figure>
+      <figure class="experience-photo">
+        <img src="img/tbd2.JPG" alt="Đồng nghiệp VNetwork chụp ảnh trong chuyến team building trên biển" loading="lazy">
+        <figcaption><i class="fa-solid fa-people-group" aria-hidden="true"></i><span data-i="experiencePhotoTeamBeach">Đồng đội bên bờ biển</span></figcaption>
       </figure>
     </div>
   </section>
@@ -236,7 +244,7 @@ footer a{color:var(--accent);font-weight:600}
   </div>
 
   <div class="sec" id="projects">
-    <h2 class="proj-h" data-i="hProj">Projects — Network & Systems</h2>
+    <h2 class="proj-h" data-i="hProj">Projects - Network & Systems</h2>
     <div class="projects">
 
       <div class="p">
@@ -319,13 +327,15 @@ const EN = {
   hObj:'Objective',
   objText:'Seeking <strong>Network/NOC Intern</strong> roles first, followed by <strong>System Administration Intern</strong> roles. Ready to apply TCP/IP, routing and switching, VLAN, DNS, VPN and firewall fundamentals to network operations, monitoring and troubleshooting while growing Linux/Windows Server administration skills.',
   hEdu:'Education', uni:'Saigon University',
-  degree:'Bachelor of Information Technology — Major in Computer Engineering',
+  degree:'Bachelor of Information Technology - Major in Computer Engineering',
   present:'Present', hExperience:'Work Experience',
   experienceRole:'IT System Support Intern',
-  experienceDates:'May 2026 – Oct 2026 · 6 months',
+  experienceDates:'Jun 2026 – Oct 2026 · 5 months',
   experienceDetails:'Supported customers and troubleshot issues involving CDN, email servers, email gateways, WAF, VPS, and SSL.',
   experiencePhotoSoc:'Security operations center',
   experiencePhotoServer:'Server operations',
+  experiencePhotoTeamActivity:'Team-building activity',
+  experiencePhotoTeamBeach:'Team by the beach',
   hSkills:'Skills',
   s2Title:'Networking & Infrastructure',
   s2Details:'<strong>Routing & Switching:</strong> TCP/IP, UDP, VLAN, BGP, OSPF, mLAG, LACP (Arista/Nexus).<br><strong>DNS & Protocols:</strong> A/AAAA/CNAME/MX/TXT/NS/SRV; SPF/DKIM/DMARC/PTR; HTTP/2/3, QUIC, SMTP, POP3, IMAP.<br><strong>VPN & Diagnostics:</strong> GRE/IPsec; nslookup, dig, traceroute, MTR, telnet, Wireshark.',
@@ -339,7 +349,7 @@ const EN = {
   s4Details:'<strong>Virtualization & Cloud:</strong> OpenNebula, VCloud (public/private/hybrid).<br><strong>Storage Networking:</strong> TrueNAS SCALE, iSCSI, LUN, multipath, OpenZFS.<br><strong>Traffic Delivery:</strong> Nginx upstream, load balancing, health checks and CDN/cache basics.',
   s6Title:'ITSM & Support Skills',
   s6Details:'<strong>IT Support:</strong> Incident, Problem, Service Request and Change; SLA tracking.<br><strong>POC:</strong> Trial support, service integration and configuration troubleshooting.<br><strong>Problem Solving:</strong> Logic Trees, MECE and the 80/20 rule.',
-  hProj:'Projects — Network & Systems',
+  hProj:'Projects - Network & Systems',
   p1:'Detects SSH brute-force attempts and blocks source IPs with Fail2ban-style rules; monitors logs and system status.',
   p2:'Deployed pfSense as an edge firewall with Suricata in IPS mode to block malicious traffic in real time.',
   p3:'Simulated ARP spoofing attacks in a lab, detected with Wireshark and mitigated with dynamic ARP inspection.',
